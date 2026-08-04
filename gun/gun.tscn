@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://durfwpyqokqek"]
+
+[ext_resource type="Script" uid="uid://j7clfqx1kep2" path="res://gun/gun.gd" id="1_1vrot"]
+[ext_resource type="Script" uid="uid://vresenge4ppd" path="res://gun/magazine.gd" id="2_0qvfs"]
+
+[sub_resource type="Resource" id="Resource_0qvfs"]
+resource_local_to_scene = true
+script = ExtResource("2_0qvfs")
+metadata/_custom_type_script = "uid://vresenge4ppd"
+
+[node name="Gun" type="Node2D" unique_id=1367513799]
+script = ExtResource("1_1vrot")
+magazine = SubResource("Resource_0qvfs")
+
+[node name="Barrel" type="Marker2D" parent="." unique_id=1400257630]
