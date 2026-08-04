@@ -1,7 +1,7 @@
 class_name Gun extends Item
 
 
-@export var PROJECTILE: PackedScene # Q: Should the projectile be synced with Magazine.AmmoType?
+@export var BULLET: PackedScene # Q: Should the projectile be synced with Magazine.AmmoType?
 @export var magazine: Magazine
 @export var automatic := false
 @export var auto_reload := true
@@ -45,10 +45,10 @@ func reload() -> void:
 func _shoot() -> void:
 	if magazine.has_ammo():
 		can_shoot = false
-		var projectile: Node2D = PROJECTILE.instantiate()
+		var bullet: Node2D = BULLET.instantiate()
 		# global might have to be set after the node is in the scene tree.
-		projectile.global_transform = barrel.global_transform
-		add_sibling(projectile)
+		bullet.global_transform = barrel.global_transform
+		add_sibling(bullet)
 		cooldown.start()
 	elif auto_reload:
 		reload()

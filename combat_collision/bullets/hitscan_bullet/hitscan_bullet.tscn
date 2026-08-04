@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dad0ecmal6ck4"]
+
+[ext_resource type="Script" uid="uid://wkmmbfbgd0lp" path="res://combat_collision/bullets/hitscan_bullet/hitscan_bullet.gd" id="1_jis4h"]
+
+[node name="HitscanBullet" type="RayCast2D" unique_id=709916053]
+enabled = false
+target_position = Vector2(768, 0)
+script = ExtResource("1_jis4h")

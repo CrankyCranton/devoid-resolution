@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://durfwpyqokqek"]
 
-[ext_resource type="Script" uid="uid://j7clfqx1kep2" path="res://item/gun/gun.gd" id="1_7rr4j"]
-[ext_resource type="Script" uid="uid://vresenge4ppd" path="res://item/gun/magazine.gd" id="2_h5jjq"]
+[ext_resource type="Script" uid="uid://j7clfqx1kep2" path="res://items/guns/gun.gd" id="1_2ffob"]
+[ext_resource type="Script" uid="uid://vresenge4ppd" path="res://items/guns/magazine.gd" id="2_fc5n0"]
 
 [sub_resource type="Resource" id="Resource_0qvfs"]
 resource_local_to_scene = true
-script = ExtResource("2_h5jjq")
+script = ExtResource("2_fc5n0")
 
 [node name="Gun" type="Node2D" unique_id=1367513799]
-script = ExtResource("1_7rr4j")
+script = ExtResource("1_2ffob")
 magazine = SubResource("Resource_0qvfs")
 
 [node name="Barrel" type="Marker2D" parent="." unique_id=1400257630]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dx02lx8hb7pll"]
 
-[ext_resource type="Script" uid="uid://cfmlbs2vnu1tp" path="res://item/pickup/pickup.gd" id="1_pcvnc"]
+[ext_resource type="Script" uid="uid://cfmlbs2vnu1tp" path="res://items/pickup/pickup.gd" id="1_4t4c7"]
 
 [sub_resource type="Gradient" id="Gradient_pcvnc"]
 interpolation_mode = 2
@@ -18,7 +18,7 @@ resource_local_to_scene = true
 radius = 16.0
 
 [node name="Pickup" type="Area2D" unique_id=407461821]
-script = ExtResource("1_pcvnc")
+script = ExtResource("1_4t4c7")
 
 [node name="Glow" type="PointLight2D" parent="." unique_id=1644005681]
 texture = SubResource("GradientTexture2D_pcvnc")

@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://b6uqx4ybutlb1"]
+
+[ext_resource type="Script" uid="uid://bx0mx1ao2doug" path="res://interactable/interactable.gd" id="1_8p6r8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8p6r8"]
+resource_local_to_scene = true
+radius = 64.0
+
+[node name="Interactable" type="Area2D" unique_id=162460185]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_8p6r8")
+
+[node name="Instructions" type="Label" parent="." unique_id=1867995370]
+visible = false
+offset_left = -91.0
+offset_top = -56.0
+offset_right = 91.0
+offset_bottom = -33.0
+text = "Press E to interact"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=334175956]
+shape = SubResource("CircleShape2D_8p6r8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
