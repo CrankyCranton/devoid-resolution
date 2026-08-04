@@ -2,11 +2,11 @@
 class_name Magazine extends Resource
 
 
-enum BulletTypes {
+enum AmmoType {
 	REGULAR,
 }
 
-@export var type: BulletTypes
+@export var type: AmmoType
 # < 0 is infinite.
 @export var max_ammo: int = -1:
 	set(value):
@@ -17,7 +17,11 @@ enum BulletTypes {
 		ammo = clampi(value, mini(0, max_ammo), max_ammo)
 
 
-func _init() -> void:
+@warning_ignore("shadowed_variable")
+func _init(type := self.type, max_ammo: int = self.max_ammo, ammo: int = self.ammo) -> void:
+	self.type = type
+	self.max_ammo = max_ammo
+	self.ammo = ammo
 	resource_local_to_scene = true
 
 
@@ -26,7 +30,7 @@ func reload(from_mag: Magazine) -> void:
 		push_error(self, ": required ammo type ", type,
 				" does not match given type ", from_mag.type, " from magazine ", from_mag)
 		return
-	
+
 	# Somewhat bug prone for now, will come back and refine later.
 	if from_mag.ammo <= -1:
 		ammo = max_ammo
@@ -36,5 +40,5 @@ func reload(from_mag: Magazine) -> void:
 		from_mag.ammo -= amount
 
 
-func can_shoot() -> bool:
+func has_ammo() -> bool:
 	return ammo != 0
