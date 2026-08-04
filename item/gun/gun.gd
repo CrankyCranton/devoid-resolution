@@ -1,4 +1,4 @@
-class_name Gun extends Node2D
+class_name Gun extends Item
 
 
 @export var PROJECTILE: PackedScene # Q: Should the projectile be synced with Magazine.AmmoType?

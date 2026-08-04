@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dx02lx8hb7pll"]
+
+[ext_resource type="Script" uid="uid://cfmlbs2vnu1tp" path="res://item/pickup/pickup.gd" id="1_pcvnc"]
+
+[sub_resource type="Gradient" id="Gradient_pcvnc"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pcvnc"]
+gradient = SubResource("Gradient_pcvnc")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qcud2"]
+resource_local_to_scene = true
+radius = 16.0
+
+[node name="Pickup" type="Area2D" unique_id=407461821]
+script = ExtResource("1_pcvnc")
+
+[node name="Glow" type="PointLight2D" parent="." unique_id=1644005681]
+texture = SubResource("GradientTexture2D_pcvnc")
+
+[node name="Sprites" type="Node2D" parent="." unique_id=1943830482]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=387061696]
+shape = SubResource("CircleShape2D_qcud2")
