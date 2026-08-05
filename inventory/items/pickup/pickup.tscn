@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dx02lx8hb7pll"]
 
-[ext_resource type="Script" uid="uid://cfmlbs2vnu1tp" path="res://items/pickup/pickup.gd" id="1_4t4c7"]
+[ext_resource type="Script" uid="uid://cfmlbs2vnu1tp" path="res://inventory/items/pickup/pickup.gd" id="1_4t4c7"]
 
 [sub_resource type="Gradient" id="Gradient_pcvnc"]
 interpolation_mode = 2

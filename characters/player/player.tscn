@@ -1,12 +1,25 @@
 [gd_scene format=3 uid="uid://bsyeedea47nvy"]
 
 [ext_resource type="Script" uid="uid://n1428fq5bhxd" path="res://characters/player/player.gd" id="1_xxgcw"]
-[ext_resource type="Texture2D" uid="uid://c7i428errg7yo" path="res://assets/player.png" id="2_exd8k"]
+[ext_resource type="PackedScene" uid="uid://dxtps0tus2r2j" path="res://combat/hitbox/hitbox.tscn" id="3_5dc8e"]
 [ext_resource type="Script" uid="uid://t64picqgbn4k" path="res://inventory/inventory.gd" id="3_exd8k"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
-radius = 2.0
-height = 12.0
+[sub_resource type="Gradient" id="Gradient_exd8k"]
+offsets = PackedFloat32Array(0, 0.1, 0.9, 1)
+colors = PackedColorArray(0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qcud2"]
+gradient = SubResource("Gradient_exd8k")
+width = 32
+height = 32
+fill = 3
+fill_from = Vector2(1, 0.5)
+fill_to = Vector2(0, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wnj1o"]
+radius = 16.0
 
 [node name="Player" type="CharacterBody2D" unique_id=130575947]
 collision_layer = 2
@@ -14,12 +27,15 @@ collision_mask = 3
 script = ExtResource("1_xxgcw")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=259123491]
-texture = ExtResource("2_exd8k")
-offset = Vector2(0, -14)
+texture = SubResource("GradientTexture2D_qcud2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=568171352]
 rotation = -1.5707964
-shape = SubResource("CapsuleShape2D_rkbax")
+shape = SubResource("CircleShape2D_wnj1o")
 
 [node name="Inventory" type="Node" parent="." unique_id=874497433]
 script = ExtResource("3_exd8k")
+
+[node name="Hitbox" parent="." unique_id=713050216 instance=ExtResource("3_5dc8e")]
+
+[connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]

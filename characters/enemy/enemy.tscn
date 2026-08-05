@@ -1,3 +1,34 @@
 [gd_scene format=3 uid="uid://dc4ob1ecpbqo6"]
 
+[ext_resource type="Script" uid="uid://bc5ftrqb1xnft" path="res://characters/enemy/enemy.gd" id="1_dxaiu"]
+[ext_resource type="PackedScene" uid="uid://dxtps0tus2r2j" path="res://combat/hitbox/hitbox.tscn" id="2_bm2dv"]
+
+[sub_resource type="Gradient" id="Gradient_bm2dv"]
+offsets = PackedFloat32Array(0, 0.1, 0.9, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iuxou"]
+gradient = SubResource("Gradient_bm2dv")
+width = 32
+height = 32
+fill = 3
+fill_from = Vector2(1, 0.5)
+fill_to = Vector2(0, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qcud2"]
+radius = 16.0
+
 [node name="Enemy" type="CharacterBody2D" unique_id=1896433514]
+script = ExtResource("1_dxaiu")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=280100165]
+texture = SubResource("GradientTexture2D_iuxou")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=212056159]
+shape = SubResource("CircleShape2D_qcud2")
+
+[node name="Hitbox" parent="." unique_id=713050216 instance=ExtResource("2_bm2dv")]
+
+[connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://durfwpyqokqek"]
 
-[ext_resource type="Script" uid="uid://j7clfqx1kep2" path="res://items/guns/gun.gd" id="1_2ffob"]
-[ext_resource type="Script" uid="uid://vresenge4ppd" path="res://items/guns/magazine.gd" id="2_fc5n0"]
+[ext_resource type="Script" uid="uid://j7clfqx1kep2" path="res://inventory/items/wieldable/guns/gun.gd" id="1_2ffob"]
+[ext_resource type="Script" uid="uid://vresenge4ppd" path="res://inventory/items/wieldable/guns/magazine.gd" id="2_fc5n0"]
 
 [sub_resource type="Resource" id="Resource_0qvfs"]
 resource_local_to_scene = true

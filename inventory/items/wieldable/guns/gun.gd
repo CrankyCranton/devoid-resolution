@@ -1,7 +1,7 @@
 class_name Gun extends Item
 
 
-@export var BULLET: PackedScene # Q: Should the projectile be synced with Magazine.AmmoType?
+@export var BULLET: PackedScene # Q: Should the bullet scene be synced with Magazine.AmmoType?
 @export var magazine: Magazine
 @export var automatic := false
 @export var auto_reload := true

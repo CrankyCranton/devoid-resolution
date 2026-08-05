@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://1vddl7w1a7ya"]
+
+[ext_resource type="Script" uid="uid://bhhwyht76kt60" path="res://combat/damage.gd" id="1_ic0j8"]
+
+[sub_resource type="Resource" id="Resource_4ysvb"]
+script = ExtResource("1_ic0j8")
+
+[node name="TestBullet" unique_id=709916053]
+damage = SubResource("Resource_4ysvb")

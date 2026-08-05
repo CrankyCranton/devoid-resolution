@@ -18,7 +18,7 @@ enum AmmoType {
 
 
 @warning_ignore("shadowed_variable")
-func _init(type := self.type, max_ammo: int = self.max_ammo, ammo: int = self.ammo) -> void:
+func _init(type := self.type, max_ammo := self.max_ammo, ammo := self.ammo) -> void:
 	self.type = type
 	self.max_ammo = max_ammo
 	self.ammo = ammo

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dxtps0tus2r2j"]
 
-[ext_resource type="Script" uid="uid://csf0iy45yo0ql" path="res://combat_collision/hitbox/hitbox.gd" id="1_udnde"]
+[ext_resource type="Script" uid="uid://csf0iy45yo0ql" path="res://combat/hitbox/hitbox.gd" id="1_udnde"]
 
 [node name="Hitbox" type="Area2D" unique_id=713050216]
 script = ExtResource("1_udnde")

@@ -26,11 +26,11 @@ window/stretch/mode="canvas_items"
 folder_colors={
 "res://assets/": "yellow",
 "res://characters/": "purple",
-"res://combat_collision/": "blue",
+"res://combat/": "blue",
 "res://hud/": "green",
 "res://interactable/": "red",
 "res://inventory/": "pink",
-"res://items/": "gray"
+"res://inventory/items/": "gray"
 }
 
 [gui]

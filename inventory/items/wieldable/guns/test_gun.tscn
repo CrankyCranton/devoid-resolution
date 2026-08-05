@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://d27yvcuyrcrvh"]
+
+[ext_resource type="PackedScene" uid="uid://durfwpyqokqek" path="res://inventory/items/wieldable/guns/gun.tscn" id="1_bvcim"]
+[ext_resource type="PackedScene" uid="uid://dad0ecmal6ck4" path="res://combat/bullets/hitscan_bullet/hitscan_bullet.tscn" id="2_288at"]
+[ext_resource type="Script" uid="uid://vresenge4ppd" path="res://inventory/items/wieldable/guns/magazine.gd" id="2_upbpa"]
+
+[sub_resource type="Resource" id="Resource_upbpa"]
+resource_local_to_scene = true
+script = ExtResource("2_upbpa")
+
+[node name="TestGun" unique_id=1367513799 instance=ExtResource("1_bvcim")]
+BULLET = ExtResource("2_288at")
+magazine = SubResource("Resource_upbpa")
