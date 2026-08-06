@@ -9,7 +9,8 @@ const MAX_HEALTH: int = 100
 # TODO: Make it depend on the player's current weight of inventory/weapon.
 const TURN_SPEED: float = 20.0
 
-var health: int = MAX_HEALTH
+@onready var health: Health = $Health
+
 var corruption: int = 0
 
 
@@ -21,5 +22,16 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func _on_hitbox_hit(damage: int) -> void:
-	health -= damage
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"primary"):
+		$Hand/TestGun.pull_trigger()
+	if event.is_action_released(&"primary"):
+		$Hand/TestGun.release_trigger()
+
+
+func _on_hitbox_hit(damage: Damage, _source: Node) -> void:
+	health.take_damage(damage)
+
+
+func _on_health_died() -> void:
+	get_tree().paused = true

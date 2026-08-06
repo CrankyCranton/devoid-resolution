@@ -13,7 +13,6 @@ enum Type {
 @export var crit_multiplier: float = 2.0
 
 
-@warning_ignore("shadowed_variable")
 func _init(type := self.type, minimum := self.minimum, maximum := self.maximum,
 		crit_chance := self.crit_chance, crit_multiplier := self.crit_multiplier) -> void:
 	self.type = type

@@ -2,7 +2,15 @@
 
 [ext_resource type="Script" uid="uid://csf0iy45yo0ql" path="res://combat/hitbox/hitbox.gd" id="1_udnde"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_j5q5k"]
+resource_local_to_scene = true
+radius = 16.0
+
 [node name="Hitbox" type="Area2D" unique_id=713050216]
+collision_layer = 768
+collision_mask = 0
+monitoring = false
 script = ExtResource("1_udnde")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1827316461]
+shape = SubResource("CircleShape2D_j5q5k")

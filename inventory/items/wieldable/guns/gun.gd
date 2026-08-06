@@ -8,16 +8,18 @@ class_name Gun extends Item
 
 var holding_trigger := false
 var can_shoot := true
-var reload_mag: Magazine
+var reload_mag: Magazine:
+	get:
+		return reload_mag if reload_mag != null else Magazine.new(magazine.type, 0)
 
 @onready var barrel: Marker2D = $Barrel
 @onready var cooldown: Timer = $Cooldown
 @onready var reload_timer: Timer = $ReloadTimer
 
 
-func _ready() -> void:
-	if reload_mag == null:
-		reload_mag = Magazine.new(magazine.type, -1) # If null, pull from an infinte supply.
+#func _ready() -> void:
+	#if reload_mag == null:
+		#reload_mag = Magazine.new(magazine.type, -1) # If null, pull from an infinte supply.
 
 
 func pull_trigger() -> void:
@@ -44,11 +46,11 @@ func reload() -> void:
 
 func _shoot() -> void:
 	if magazine.has_ammo():
+		magazine.ammo -= 1
 		can_shoot = false
 		var bullet: Node2D = BULLET.instantiate()
-		# global might have to be set after the node is in the scene tree.
 		bullet.global_transform = barrel.global_transform
-		add_sibling(bullet)
+		get_tree().current_scene.add_child(bullet)
 		cooldown.start()
 	elif auto_reload:
 		reload()

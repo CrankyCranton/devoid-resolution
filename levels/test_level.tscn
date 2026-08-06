@@ -1,5 +1,9 @@
 [gd_scene format=3 uid="uid://bfv2v7qa227dc"]
 
 [ext_resource type="PackedScene" uid="uid://dd6vndcjh581a" path="res://levels/level.tscn" id="1_46lwt"]
+[ext_resource type="PackedScene" uid="uid://dc4ob1ecpbqo6" path="res://characters/enemy/enemy.tscn" id="2_x25rp"]
 
 [node name="TestLevel" unique_id=533186492 instance=ExtResource("1_46lwt")]
+
+[node name="Enemy" parent="." index="1" unique_id=1896433514 instance=ExtResource("2_x25rp")]
+position = Vector2(177, 114)

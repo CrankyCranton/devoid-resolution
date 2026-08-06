@@ -1,8 +1,8 @@
 class_name Hitbox extends Area2D
 
 
-signal hit(damage: int)
+signal hit(damage: Damage, source: Node)
 
 
-func take_damage(damage: int) -> void:
-	hit.emit(damage)
+func take_damage(damage: Damage, source: Node) -> void:
+	hit.emit(damage, source)

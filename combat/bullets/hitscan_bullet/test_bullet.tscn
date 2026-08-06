@@ -1,9 +1,11 @@
-[gd_scene format=3 uid="uid://1vddl7w1a7ya"]
+[gd_scene format=3 uid="uid://dx4m6q82ukwxe"]
 
-[ext_resource type="Script" uid="uid://bhhwyht76kt60" path="res://combat/damage.gd" id="1_ic0j8"]
+[ext_resource type="PackedScene" uid="uid://dad0ecmal6ck4" path="res://combat/bullets/hitscan_bullet/hitscan_bullet.tscn" id="1_ic0j8"]
+[ext_resource type="Script" uid="uid://bhhwyht76kt60" path="res://combat/damage.gd" id="2_o8te7"]
 
-[sub_resource type="Resource" id="Resource_4ysvb"]
-script = ExtResource("1_ic0j8")
+[sub_resource type="Resource" id="Resource_ajbks"]
+script = ExtResource("2_o8te7")
+metadata/_custom_type_script = "uid://bhhwyht76kt60"
 
-[node name="TestBullet" unique_id=709916053]
-damage = SubResource("Resource_4ysvb")
+[node name="HitscanBullet" unique_id=709916053 instance=ExtResource("1_ic0j8")]
+damage = SubResource("Resource_ajbks")

@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://dad0ecmal6ck4"]
 
 [ext_resource type="Script" uid="uid://wkmmbfbgd0lp" path="res://combat/bullets/hitscan_bullet/hitscan_bullet.gd" id="1_jis4h"]
+[ext_resource type="PackedScene" uid="uid://b1c72hf5vror3" path="res://vfx/test_shoot_fx.tscn" id="2_fdbv0"]
 
 [node name="HitscanBullet" type="RayCast2D" unique_id=709916053]
 enabled = false
 target_position = Vector2(768, 0)
+collision_mask = 769
+collide_with_areas = true
 script = ExtResource("1_jis4h")
+SHOOT_FX = ExtResource("2_fdbv0")

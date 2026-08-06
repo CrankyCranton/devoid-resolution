@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bc5ftrqb1xnft" path="res://characters/enemy/enemy.gd" id="1_dxaiu"]
 [ext_resource type="PackedScene" uid="uid://dxtps0tus2r2j" path="res://combat/hitbox/hitbox.tscn" id="2_bm2dv"]
+[ext_resource type="Script" uid="uid://bobcaht513ty" path="res://combat/health.gd" id="3_iuxou"]
 
 [sub_resource type="Gradient" id="Gradient_bm2dv"]
 offsets = PackedFloat32Array(0, 0.1, 0.9, 1)
@@ -21,6 +22,8 @@ metadata/_snap_enabled = true
 radius = 16.0
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1896433514]
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_dxaiu")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=280100165]
@@ -31,4 +34,12 @@ shape = SubResource("CircleShape2D_qcud2")
 
 [node name="Hitbox" parent="." unique_id=713050216 instance=ExtResource("2_bm2dv")]
 
+[node name="Health" type="Node" parent="." unique_id=2046408451]
+script = ExtResource("3_iuxou")
+max_health = null
+health = null
+vulnerabilities = null
+metadata/_custom_type_script = "uid://bobcaht513ty"
+
 [connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
+[connection signal="died" from="Health" to="." method="_on_health_died"]

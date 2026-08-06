@@ -10,14 +10,13 @@ enum AmmoType {
 # < 0 is infinite.
 @export var max_ammo: int = -1:
 	set(value):
-		max_ammo = value
-		ammo = ammo # Call setter.
+		max_ammo = maxi(value, -1)
+		ammo = max_ammo if ammo <= -1 else ammo # Call setter.
 @export var ammo: int = -1:
 	set(value):
 		ammo = clampi(value, mini(0, max_ammo), max_ammo)
 
 
-@warning_ignore("shadowed_variable")
 func _init(type := self.type, max_ammo := self.max_ammo, ammo := self.ammo) -> void:
 	self.type = type
 	self.max_ammo = max_ammo

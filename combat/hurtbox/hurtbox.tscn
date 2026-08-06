@@ -9,6 +9,9 @@ script = ExtResource("2_e007l")
 metadata/_custom_type_script = "uid://bhhwyht76kt60"
 
 [node name="Hurtbox" type="Area2D" unique_id=1070702956]
+collision_layer = 0
+collision_mask = 768
+monitorable = false
 script = ExtResource("1_s6s21")
 damage = SubResource("Resource_wnj1o")
 
