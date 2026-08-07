@@ -1,6 +1,4 @@
-class_name Player extends CharacterBody2D
-# NOTE: If enemies and player have things in common about movement like traction,
-# it might be a good idea to make them both extend from a base class.
+class_name Player extends Kinematic
 
 
 const SPEED: float = 128.0
@@ -33,5 +31,5 @@ func _on_hitbox_hit(damage: Damage, _source: Node) -> void:
 	health.take_damage(damage)
 
 
-func _on_health_died() -> void:
+func _on_health_died(_excess_damage: int) -> void:
 	get_tree().paused = true

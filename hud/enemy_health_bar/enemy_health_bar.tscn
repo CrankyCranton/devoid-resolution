@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://cntbr4k5nascj"]
+
+[ext_resource type="Script" uid="uid://cjbvjvlra63wd" path="res://hud/enemy_health_bar/enemy_health_bar.gd" id="1_w5avh"]
+
+[sub_resource type="Gradient" id="Gradient_3e8v3"]
+colors = PackedColorArray(0.62965983, 0.38759997, 0.76, 1, 0.10271682, 0.14277737, 0.34531495, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3e8v3"]
+gradient = SubResource("Gradient_3e8v3")
+height = 3
+fill_to = Vector2(1, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_w5avh"]
+diffuse_texture = SubResource("GradientTexture2D_3e8v3")
+texture_repeat = 3
+
+[sub_resource type="Gradient" id="Gradient_w5avh"]
+colors = PackedColorArray(0.69616, 0.76, 0.44080004, 1, 0.10271682, 0.34531495, 0.20478632, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_27uol"]
+gradient = SubResource("Gradient_w5avh")
+height = 3
+fill_to = Vector2(1, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_dcqmq"]
+diffuse_texture = SubResource("GradientTexture2D_27uol")
+texture_repeat = 3
+
+[node name="EnemyHealthBar" type="HBoxContainer" unique_id=76447671]
+offset_left = -12.5
+offset_top = -3.0
+offset_right = 12.5
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0)
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("1_w5avh")
+
+[node name="CorruptionBar" type="TextureRect" parent="." unique_id=1345868954]
+clip_contents = true
+layout_mode = 2
+texture = SubResource("CanvasTexture_w5avh")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="HealthBar" type="TextureRect" parent="." unique_id=2042395855]
+custom_minimum_size = Vector2(25, 0)
+clip_contents = true
+layout_mode = 2
+texture = SubResource("CanvasTexture_dcqmq")
+expand_mode = 1
+stretch_mode = 1

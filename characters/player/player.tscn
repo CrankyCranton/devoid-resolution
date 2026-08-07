@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://t64picqgbn4k" path="res://inventory/inventory.gd" id="3_exd8k"]
 [ext_resource type="PackedScene" uid="uid://d27yvcuyrcrvh" path="res://inventory/items/wieldable/guns/test_gun.tscn" id="4_ixbpm"]
 [ext_resource type="Script" uid="uid://vresenge4ppd" path="res://inventory/items/wieldable/guns/magazine.gd" id="5_c6leb"]
-[ext_resource type="Script" uid="uid://bobcaht513ty" path="res://combat/health.gd" id="6_c6leb"]
+[ext_resource type="PackedScene" uid="uid://doffktit51wlw" path="res://combat/health/health.tscn" id="6_c6leb"]
 
 [sub_resource type="Gradient" id="Gradient_exd8k"]
 offsets = PackedFloat32Array(0, 0.1, 0.9, 1)
@@ -53,9 +53,7 @@ position = Vector2(16, 0)
 [node name="TestGun" parent="Hand" unique_id=1367513799 instance=ExtResource("4_ixbpm")]
 magazine = SubResource("Resource_c6leb")
 
-[node name="Health" type="Node" parent="." unique_id=232349684]
-script = ExtResource("6_c6leb")
-metadata/_custom_type_script = "uid://bobcaht513ty"
+[node name="Health" parent="." unique_id=1038555171 instance=ExtResource("6_c6leb")]
 
 [connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
 [connection signal="died" from="Health" to="." method="_on_health_died"]

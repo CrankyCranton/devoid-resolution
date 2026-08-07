@@ -7,7 +7,8 @@ class_name Gun extends Item
 @export var auto_reload := true
 
 var holding_trigger := false
-var can_shoot := true
+var cooling := false
+var reloading := false
 var reload_mag: Magazine:
 	get:
 		return reload_mag if reload_mag != null else Magazine.new(magazine.type, 0)
@@ -17,14 +18,9 @@ var reload_mag: Magazine:
 @onready var reload_timer: Timer = $ReloadTimer
 
 
-#func _ready() -> void:
-	#if reload_mag == null:
-		#reload_mag = Magazine.new(magazine.type, -1) # If null, pull from an infinte supply.
-
-
 func pull_trigger() -> void:
 	holding_trigger = true
-	if can_shoot:
+	if not (reloading or cooling):
 		_shoot()
 
 
@@ -33,13 +29,15 @@ func release_trigger() -> void:
 
 
 func reload() -> void:
-	if magazine.ammo < 0:
+	if reloading:
+		return
+	if magazine.ammo <= -1:
 		return # Guns with infinite ammo can't reload.
 	if not reload_mag.has_ammo():
 		# Play click sound.
 		return
 
-	can_shoot = false
+	reloading = true
 	cooldown.stop()
 	reload_timer.start()
 
@@ -47,7 +45,7 @@ func reload() -> void:
 func _shoot() -> void:
 	if magazine.has_ammo():
 		magazine.ammo -= 1
-		can_shoot = false
+		cooling = true
 		var bullet: Node2D = BULLET.instantiate()
 		bullet.global_transform = barrel.global_transform
 		get_tree().current_scene.add_child(bullet)
@@ -59,7 +57,7 @@ func _shoot() -> void:
 
 
 func _on_cooldown_timeout() -> void:
-	can_shoot = true
+	cooling = false
 	if automatic and holding_trigger:
 		_shoot()
 
@@ -68,4 +66,4 @@ func _on_reload_timer_timeout() -> void:
 	# Since it's delayed, it's possible that reload_mag is empty by the time it tries to reload.
 	# Shouldn't be a problem, though.
 	magazine.reload(reload_mag)
-	can_shoot = true
+	reloading = false

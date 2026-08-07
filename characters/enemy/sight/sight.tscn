@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://li5dweujrwo4"]
+
+[ext_resource type="Script" uid="uid://bfc420wj3y3o2" path="res://characters/enemy/sight/sight.gd" id="1_cw7cu"]
+
+[node name="Sight" type="Area2D" unique_id=734266294]
+monitorable = false
+script = ExtResource("1_cw7cu")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=2135666165]
+polygon = PackedVector2Array(-48, 0, -24, 40, 192, 192, 192, -192, -24, -40)
+
+[node name="LOS" type="RayCast2D" parent="." unique_id=815817950]
+enabled = false
+target_position = Vector2(0, 0)
+collision_mask = 3
+
+[connection signal="area_exited" from="." to="." method="_on_collider_exited"]
+[connection signal="body_exited" from="." to="." method="_on_collider_exited"]

@@ -3,7 +3,7 @@ class_name Health extends Node
 # and connecting signals via GUI less convenient.
 
 
-signal died
+signal died(excess_damage: int)
 signal hurt(damage: int)
 signal healed(healing: int)
 signal health_changed(health: int)
@@ -35,7 +35,8 @@ func take_damage(damage: Damage) -> void:
 	var damage_num: int = damage.get_damage()
 	if vulnerabilities.has(damage.type):
 		damage_num = floori(damage_num * vulnerabilities[damage.type])
+	var excess: int = mini(0, health - damage_num)
 	health -= damage_num
 	hurt.emit(damage_num)
 	if health <= 0:
-		died.emit()
+		died.emit(excess)

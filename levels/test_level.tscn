@@ -5,5 +5,8 @@
 
 [node name="TestLevel" unique_id=533186492 instance=ExtResource("1_46lwt")]
 
+[node name="Player" parent="." index="0" unique_id=130575947]
+position = Vector2(34, 51)
+
 [node name="Enemy" parent="." index="1" unique_id=1896433514 instance=ExtResource("2_x25rp")]
 position = Vector2(177, 114)

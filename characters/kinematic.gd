@@ -1,0 +1,1 @@
+class_name Kinematic extends CharacterBody2D
