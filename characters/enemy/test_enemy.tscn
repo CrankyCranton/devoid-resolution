@@ -1,10 +1,70 @@
 [gd_scene format=3 uid="uid://d3nsofkm343n4"]
 
 [ext_resource type="PackedScene" uid="uid://dc4ob1ecpbqo6" path="res://characters/enemy/enemy.tscn" id="1_6idrw"]
+[ext_resource type="Script" uid="uid://pjudu2rnh6g0" path="res://ai/tasks/follow.gd" id="2_18jhx"]
+[ext_resource type="Script" uid="uid://b1s5a7803yos3" path="res://characters/enemy/test_enemy.gd" id="2_81gk7"]
+[ext_resource type="Script" uid="uid://baifofimflsil" path="res://ai/tasks/move.gd" id="3_ss6dp"]
+[ext_resource type="PackedScene" uid="uid://li5dweujrwo4" path="res://characters/enemy/sight/sight.tscn" id="4_15vqh"]
+[ext_resource type="Script" uid="uid://sc3476ucsq60" path="res://ai/tasks/rotator.gd" id="4_qao1d"]
 
-[sub_resource type="BlackboardPlan" id="BlackboardPlan_6idrw"]
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_427j3"]
+var/target/name = &"target"
+var/target/type = 24
+var/target/hint = 0
+var/target/hint_string = ""
+binding/target = NodePath(".:player")
+
+[sub_resource type="BBVariant" id="BBVariant_ss6dp"]
+saved_value = null
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_15vqh"]
+variable = &"target"
+check_type = 5
+value = SubResource("BBVariant_ss6dp")
+
+[sub_resource type="BTAction" id="BTAction_ss6dp"]
+script = ExtResource("2_18jhx")
+target = null
+blackboard_sync = &"target"
+
+[sub_resource type="BTAction" id="BTAction_l7j7h"]
+script = ExtResource("4_qao1d")
+target = null
+blackboard_sync = &"target"
+
+[sub_resource type="BTParallel" id="BTParallel_qao1d"]
+children = [SubResource("BTAction_ss6dp"), SubResource("BTAction_l7j7h")]
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_81gk7"]
+children = [SubResource("BTCheckVar_15vqh"), SubResource("BTParallel_qao1d")]
+
+[sub_resource type="BTAction" id="BTAction_15vqh"]
+custom_name = "Idle"
+script = ExtResource("3_ss6dp")
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_81gk7"]
+children = [SubResource("BTDynamicSequence_81gk7"), SubResource("BTAction_15vqh")]
+
+[sub_resource type="BehaviorTree" id="BehaviorTree_81gk7"]
+blackboard_plan = SubResource("BlackboardPlan_427j3")
+root_task = SubResource("BTDynamicSelector_81gk7")
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_qao1d"]
+binding/target = NodePath("..:player")
 
 [node name="TestEnemy" unique_id=1896433514 instance=ExtResource("1_6idrw")]
+script = ExtResource("2_81gk7")
 
 [node name="BTPlayer" parent="." index="4" unique_id=817829925]
-blackboard_plan = SubResource("BlackboardPlan_6idrw")
+behavior_tree = SubResource("BehaviorTree_81gk7")
+blackboard_plan = SubResource("BlackboardPlan_qao1d")
+
+[node name="EnemyHealthBar" parent="." index="5" unique_id=76447671]
+grow_horizontal = 2
+
+[node name="Sight" parent="." index="6" unique_id=734266294 instance=ExtResource("4_15vqh")]
+
+[connection signal="collider_entered" from="Sight" to="." method="_on_sight_collider_entered"]
+[connection signal="collider_exited" from="Sight" to="." method="_on_sight_collider_exited"]
+
+[editable path="Sight"]

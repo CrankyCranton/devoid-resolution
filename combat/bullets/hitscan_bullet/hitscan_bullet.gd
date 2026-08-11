@@ -2,6 +2,8 @@ class_name HitScanBullet extends RayCast2D
 # Should hitting accuratly increase damage, or increase the lower range of the rand damage?
 # Leaning towards the later because it's different.
 # Accuracy can be messured using Vector2.slide().
+# Actually, I like the idea of no randomness/only using randomness for certain guns.
+# Because randomness can be simulated by adding a random angle to the gun's aim.
 
 
 @export var damage: Damage

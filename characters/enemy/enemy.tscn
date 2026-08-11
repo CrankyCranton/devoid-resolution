@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bc5ftrqb1xnft" path="res://characters/enemy/enemy.gd" id="1_dxaiu"]
 [ext_resource type="PackedScene" uid="uid://dxtps0tus2r2j" path="res://combat/hitbox/hitbox.tscn" id="2_bm2dv"]
 [ext_resource type="PackedScene" uid="uid://doffktit51wlw" path="res://combat/health/health.tscn" id="3_iuxou"]
+[ext_resource type="PackedScene" uid="uid://cntbr4k5nascj" path="res://hud/enemy_health_bar/enemy_health_bar.tscn" id="4_427j3"]
 
 [sub_resource type="Gradient" id="Gradient_bm2dv"]
 offsets = PackedFloat32Array(0, 0.1, 0.9, 1)
@@ -21,12 +22,19 @@ metadata/_snap_enabled = true
 [sub_resource type="CircleShape2D" id="CircleShape2D_qcud2"]
 radius = 16.0
 
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_427j3"]
+
+[sub_resource type="BehaviorTree" id="BehaviorTree_427j3"]
+blackboard_plan = SubResource("BlackboardPlan_427j3")
+resource_local_to_scene = true
+
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_iuxou"]
 resource_local_to_scene = true
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1896433514]
 collision_layer = 4
 collision_mask = 7
+motion_mode = 1
 script = ExtResource("1_dxaiu")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=280100165]
@@ -40,7 +48,12 @@ shape = SubResource("CircleShape2D_qcud2")
 [node name="Health" parent="." unique_id=1038555171 instance=ExtResource("3_iuxou")]
 
 [node name="BTPlayer" type="BTPlayer" parent="." unique_id=817829925]
+behavior_tree = SubResource("BehaviorTree_427j3")
 blackboard_plan = SubResource("BlackboardPlan_iuxou")
+
+[node name="EnemyHealthBar" parent="." unique_id=76447671 instance=ExtResource("4_427j3")]
+offset_top = -22.0
+offset_bottom = -19.0
 
 [connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
 [connection signal="died" from="Health" to="." method="_on_health_died"]

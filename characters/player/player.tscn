@@ -33,6 +33,7 @@ ammo = 100
 [node name="Player" type="CharacterBody2D" unique_id=130575947]
 collision_layer = 2
 collision_mask = 3
+motion_mode = 1
 script = ExtResource("1_xxgcw")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=259123491]
