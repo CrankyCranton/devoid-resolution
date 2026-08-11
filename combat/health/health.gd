@@ -42,6 +42,7 @@ var karma: int = 0:
 			return
 		karma = value
 		karma_changed.emit(karma)
+var already_released_karma := false
 
 
 func _ready() -> void:
@@ -72,19 +73,26 @@ func heal(healing: int) -> void:
 # Condition: Any temporary effect on a character.
 # TODO: Multiply health by how much a bullet hit to the center.
 # Probs more of a bullet script thing than health component thing.
-func take_damage(damage: Damage) -> void:
+func take_damage(damage: Damage, instigator: Node = null) -> void:
+	var previous_released_karma: int = karma
 	var damage_num: int = damage.get_damage()
 	if vulnerabilities.has(damage.type):
 		damage_num = floori(damage_num * vulnerabilities[damage.type])
 	var excess: int = damage_num - maxi(0, health)
 	health -= damage_num
+	if instigator is Player:
+		karma += damage.pain
 	hurt.emit(damage_num)
 
 	if health <= 0:
-		karma += excess
+		if instigator is Player:
+			karma += excess
+			if already_released_karma:
+				instigator.corruption -= previous_released_karma
+			instigator.corruption += karma
+			already_released_karma = true
 		died.emit(karma)
-	karma += damage.pain
 
 
-func _on_hitbox_hit(damage: Damage, _source: Node) -> void:
-	take_damage(damage)
+func _on_hitbox_hit(damage: Damage, instigator: Node) -> void:
+	take_damage(damage, instigator)

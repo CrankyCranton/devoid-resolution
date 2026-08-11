@@ -21,4 +21,5 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 39.0
 offset_bottom = 187.0
+max_value = 1000.0
 fill_mode = 3

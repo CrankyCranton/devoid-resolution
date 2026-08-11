@@ -9,12 +9,14 @@ signal hurt(hitbox: Hitbox)
 
 var already_hit: Array[Node] # TODO: Find way to clear already_hit when the Hurtbox is disabled.
 
+@onready var instigator: Node = owner
+
 
 func _on_area_entered(hitbox: Hitbox) -> void:
 	if ((ignore_after_first_hit and hitbox.owner in already_hit)
 			or hitbox.owner in ignore_list or hitbox in ignore_list):
 		return
 
-	hitbox.take_damage(damage, self)
+	hitbox.take_damage(damage, instigator)
 	already_hit.append(hitbox.owner)
 	hurt.emit(hitbox)
