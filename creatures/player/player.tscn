@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bsyeedea47nvy"]
 
-[ext_resource type="Script" uid="uid://n1428fq5bhxd" path="res://characters/player/player.gd" id="1_xxgcw"]
+[ext_resource type="Script" uid="uid://n1428fq5bhxd" path="res://creatures/player/player.gd" id="1_xxgcw"]
 [ext_resource type="PackedScene" uid="uid://dxtps0tus2r2j" path="res://combat/hitbox/hitbox.tscn" id="3_5dc8e"]
 [ext_resource type="Script" uid="uid://t64picqgbn4k" path="res://inventory/inventory.gd" id="3_exd8k"]
 [ext_resource type="PackedScene" uid="uid://d27yvcuyrcrvh" path="res://inventory/items/wieldable/guns/test_gun.tscn" id="4_ixbpm"]
@@ -24,7 +24,7 @@ metadata/_snap_enabled = true
 [sub_resource type="CircleShape2D" id="CircleShape2D_wnj1o"]
 radius = 16.0
 
-[sub_resource type="Resource" id="Resource_c6leb"]
+[sub_resource type="Resource" id="Resource_2fd13"]
 resource_local_to_scene = true
 script = ExtResource("5_c6leb")
 max_ammo = 100
@@ -52,9 +52,10 @@ script = ExtResource("3_exd8k")
 position = Vector2(16, 0)
 
 [node name="TestGun" parent="Hand" unique_id=1367513799 instance=ExtResource("4_ixbpm")]
-magazine = SubResource("Resource_c6leb")
+magazine = SubResource("Resource_2fd13")
 
-[node name="Health" parent="." unique_id=1038555171 instance=ExtResource("6_c6leb")]
+[node name="Health" parent="." unique_id=1038555171 node_paths=PackedStringArray("hitboxes") instance=ExtResource("6_c6leb")]
+hitboxes = [NodePath("../Hitbox")]
+heartless = true
 
-[connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
 [connection signal="died" from="Health" to="." method="_on_health_died"]

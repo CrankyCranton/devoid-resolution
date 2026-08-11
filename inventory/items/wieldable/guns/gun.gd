@@ -1,6 +1,8 @@
 class_name Gun extends Item
 
 
+signal hurt(hitbox: Hitbox)
+
 @export var BULLET: PackedScene # Q: Should the bullet scene be synced with Magazine.AmmoType?
 @export var magazine: Magazine
 @export var automatic := false
@@ -47,6 +49,8 @@ func _shoot() -> void:
 		magazine.ammo -= 1
 		cooling = true
 		var bullet: Node2D = BULLET.instantiate()
+		if bullet.has_signal(&"hurt"):
+			bullet.hurt.connect(hurt.emit)
 		bullet.global_transform = barrel.global_transform
 		get_tree().current_scene.add_child(bullet)
 		cooldown.start()

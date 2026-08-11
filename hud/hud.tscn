@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://b7r7sotyreews"]
+
+[ext_resource type="Script" uid="uid://bcqo441k50fq7" path="res://hud/hud.gd" id="1_6ca3a"]
+
+[node name="HUD" type="CanvasLayer" unique_id=955463685]
+script = ExtResource("1_6ca3a")
+
+[node name="ControlRoot" type="Control" parent="." unique_id=275617783]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CorruptionBar" type="ProgressBar" parent="ControlRoot" unique_id=813136934]
+unique_name_in_owner = true
+editor_description = "Might remove if corruption isn't instant death."
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 39.0
+offset_bottom = 187.0
+fill_mode = 3

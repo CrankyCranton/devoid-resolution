@@ -4,7 +4,8 @@ class_name Follow extends Move
 
 @export var desired_distance: float = 32.0
 @warning_ignore("untyped_declaration")
-@export_node_path("Node2D") var target # Can be Vector2 or Node2D.
+## Can be Vector2 or Node2D, or NodePath.
+@export_node_path("Node2D") var target
 @export var blackboard_sync := &""
 
 

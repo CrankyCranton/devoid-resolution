@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dc4ob1ecpbqo6"]
 
-[ext_resource type="Script" uid="uid://bc5ftrqb1xnft" path="res://characters/enemy/enemy.gd" id="1_dxaiu"]
+[ext_resource type="Script" uid="uid://bc5ftrqb1xnft" path="res://creatures/enemy/enemy.gd" id="1_dxaiu"]
 [ext_resource type="PackedScene" uid="uid://dxtps0tus2r2j" path="res://combat/hitbox/hitbox.tscn" id="2_bm2dv"]
 [ext_resource type="PackedScene" uid="uid://doffktit51wlw" path="res://combat/health/health.tscn" id="3_iuxou"]
 [ext_resource type="PackedScene" uid="uid://cntbr4k5nascj" path="res://hud/enemy_health_bar/enemy_health_bar.tscn" id="4_427j3"]
@@ -21,6 +21,12 @@ metadata/_snap_enabled = true
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qcud2"]
 radius = 16.0
+
+[sub_resource type="Curve" id="Curve_fxr07"]
+_limits = [0.0, 10.0, 0.0, 50.0]
+_data = [Vector2(0, 5), 0.0, 0.0, 0, 0, Vector2(50, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_427j3"]
 
@@ -45,7 +51,9 @@ shape = SubResource("CircleShape2D_qcud2")
 
 [node name="Hitbox" parent="." unique_id=713050216 instance=ExtResource("2_bm2dv")]
 
-[node name="Health" parent="." unique_id=1038555171 instance=ExtResource("3_iuxou")]
+[node name="Health" parent="." unique_id=1038555171 node_paths=PackedStringArray("hitboxes") instance=ExtResource("3_iuxou")]
+hitboxes = [NodePath("../Hitbox")]
+bleed_rate = SubResource("Curve_fxr07")
 
 [node name="BTPlayer" type="BTPlayer" parent="." unique_id=817829925]
 behavior_tree = SubResource("BehaviorTree_427j3")
@@ -54,6 +62,8 @@ blackboard_plan = SubResource("BlackboardPlan_iuxou")
 [node name="EnemyHealthBar" parent="." unique_id=76447671 instance=ExtResource("4_427j3")]
 offset_top = -22.0
 offset_bottom = -19.0
+karma = 0
 
-[connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
 [connection signal="died" from="Health" to="." method="_on_health_died"]
+[connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
+[connection signal="karma_changed" from="Health" to="." method="_on_health_karma_changed"]

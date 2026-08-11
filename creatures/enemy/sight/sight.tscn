@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://li5dweujrwo4"]
 
-[ext_resource type="Script" uid="uid://bfc420wj3y3o2" path="res://characters/enemy/sight/sight.gd" id="1_cw7cu"]
+[ext_resource type="Script" uid="uid://bfc420wj3y3o2" path="res://creatures/enemy/sight/sight.gd" id="1_cw7cu"]
 
 [node name="Sight" type="Area2D" unique_id=734266294]
 collision_layer = 0

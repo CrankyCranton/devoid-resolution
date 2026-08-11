@@ -19,6 +19,10 @@ run/main_scene="uid://bfv2v7qa227dc"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+HUD="*uid://b7r7sotyreews"
+
 [debug]
 
 gdscript/warnings/shadowed_variable=0
@@ -38,8 +42,8 @@ enabled=PackedStringArray("res://addons/rmsmartshape/plugin.cfg", "res://addons/
 
 folder_colors={
 "res://assets/": "yellow",
-"res://characters/": "purple",
 "res://combat/": "blue",
+"res://creatures/": "purple",
 "res://hud/": "green",
 "res://interactable/": "red",
 "res://inventory/": "pink",
@@ -49,6 +53,7 @@ folder_colors={
 
 [gui]
 
+theme/default_font_antialiasing=0
 theme/custom_font="uid://dvg44pj43k85w"
 
 [input]

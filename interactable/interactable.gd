@@ -11,6 +11,7 @@ var within_range := false
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"interact") and within_range and current_interactable == null:
 		current_interactable = self
+		# Start dialogue.
 
 
 func _on_body_entered(_body: Node2D) -> void:

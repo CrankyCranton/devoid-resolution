@@ -9,7 +9,10 @@ const TURN_SPEED: float = 20.0
 
 @onready var health: Health = $Health
 
-var corruption: int = 0
+var corruption: int = 0:
+	set(value):
+		corruption = value
+		HUD.set_corruption(corruption)
 
 
 func _physics_process(delta: float) -> void:
@@ -27,9 +30,5 @@ func _input(event: InputEvent) -> void:
 		$Hand/TestGun.release_trigger()
 
 
-func _on_hitbox_hit(damage: Damage, _source: Node) -> void:
-	health.take_damage(damage)
-
-
-func _on_health_died(_excess_damage: int) -> void:
+func _on_health_died(_krama: int) -> void:
 	get_tree().paused = true
