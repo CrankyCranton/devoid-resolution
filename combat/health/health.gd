@@ -43,6 +43,7 @@ var karma: int = 0:
 		karma = value
 		karma_changed.emit(karma)
 var already_released_karma := false
+var player: Player = null # Recorded if the player hit the enemy.
 
 
 func _ready() -> void:
@@ -57,7 +58,8 @@ func _process(delta: float) -> void:
 		var time_until_next_bleed: float = 1.0 / bleed_rate.sample(health)
 		while time_since_bled >= time_until_next_bleed:
 			time_since_bled -= time_until_next_bleed
-			take_damage(Damage.new(Damage.Type.BLEED, 1, 1, 0.0, 1.0, 1))
+			# If the player hits a creature, it's always the player's fault if the creature bleeds.
+			take_damage(Damage.new(Damage.Type.BLEED, 1, 1, 0.0, 1.0, 3), player)
 			# Put into function? "do while" could be useful here.
 			time_until_next_bleed = 1.0 / bleed_rate.sample(health)
 	else:
@@ -87,12 +89,16 @@ func take_damage(damage: Damage, instigator: Node = null) -> void:
 	if health <= 0:
 		if instigator is Player:
 			karma += excess
+		if player != null:
+			var adding_karma: int = karma
 			if already_released_karma:
-				instigator.corruption -= previous_released_karma
-			instigator.corruption += karma
+				adding_karma -= previous_released_karma
+			player.corruption += adding_karma
 			already_released_karma = true
 		died.emit(karma)
 
 
 func _on_hitbox_hit(damage: Damage, instigator: Node) -> void:
+	if instigator is Player:
+		player = instigator
 	take_damage(damage, instigator)
