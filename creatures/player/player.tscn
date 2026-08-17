@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://n1428fq5bhxd" path="res://creatures/player/player.gd" id="1_xxgcw"]
 [ext_resource type="PackedScene" uid="uid://dxtps0tus2r2j" path="res://combat/hitbox/hitbox.tscn" id="3_5dc8e"]
-[ext_resource type="Script" uid="uid://t64picqgbn4k" path="res://inventory/inventory.gd" id="3_exd8k"]
 [ext_resource type="PackedScene" uid="uid://d27yvcuyrcrvh" path="res://inventory/items/wieldable/guns/test_gun.tscn" id="4_ixbpm"]
 [ext_resource type="Script" uid="uid://vresenge4ppd" path="res://inventory/items/wieldable/guns/magazine.gd" id="5_c6leb"]
 [ext_resource type="PackedScene" uid="uid://doffktit51wlw" path="res://combat/health/health.tscn" id="6_c6leb"]
@@ -24,7 +23,7 @@ metadata/_snap_enabled = true
 [sub_resource type="CircleShape2D" id="CircleShape2D_wnj1o"]
 radius = 16.0
 
-[sub_resource type="Resource" id="Resource_2fd13"]
+[sub_resource type="Resource" id="Resource_ui20s"]
 resource_local_to_scene = true
 script = ExtResource("5_c6leb")
 max_ammo = 100
@@ -43,16 +42,13 @@ texture = SubResource("GradientTexture2D_qcud2")
 rotation = -1.5707964
 shape = SubResource("CircleShape2D_wnj1o")
 
-[node name="Inventory" type="Node" parent="." unique_id=874497433]
-script = ExtResource("3_exd8k")
-
 [node name="Hitbox" parent="." unique_id=713050216 instance=ExtResource("3_5dc8e")]
 
 [node name="Hand" type="Marker2D" parent="." unique_id=763609668]
 position = Vector2(16, 0)
 
 [node name="TestGun" parent="Hand" unique_id=1367513799 instance=ExtResource("4_ixbpm")]
-magazine = SubResource("Resource_2fd13")
+magazine = SubResource("Resource_ui20s")
 
 [node name="Health" parent="." unique_id=1038555171 node_paths=PackedStringArray("hitboxes") instance=ExtResource("6_c6leb")]
 hitboxes = [NodePath("../Hitbox")]

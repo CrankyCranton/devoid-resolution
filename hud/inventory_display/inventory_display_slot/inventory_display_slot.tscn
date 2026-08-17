@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dipfyhh8m6f18"]
+
+[ext_resource type="Script" uid="uid://bbu7yw6555mca" path="res://hud/inventory_display/inventory_display_slot/inventory_display_slot.gd" id="1_2e7a0"]
+
+[node name="InventoryDisplaySlot" type="TextureRect" unique_id=1472236627]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_2e7a0")
