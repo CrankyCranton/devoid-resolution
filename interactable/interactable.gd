@@ -5,13 +5,14 @@ static var current_interactable: Interactable = null
 
 var within_range := false
 
-@onready var instructions: Label = $Instructions
+@onready var instructions: Label = $Instructions # TODO: Clamp intruction text to within the screen.
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"interact") and within_range and current_interactable == null:
 		current_interactable = self
-		# Start dialogue.
+		# await start_dialogue()
+		current_interactable = null
 
 
 func _on_body_entered(_body: Node2D) -> void:

@@ -1,15 +1,156 @@
 [gd_scene format=3 uid="uid://hf8uovgvp6bv"]
 
 [ext_resource type="Script" uid="uid://bwxte6hjo886f" path="res://hud/inventory_display/inventory_display.gd" id="1_i8x1k"]
+[ext_resource type="PackedScene" uid="uid://bh1kph1si1x55" path="res://hud/inventory_display/inventory_display_item/inventory_display_item.tscn" id="2_7vh03"]
 
-[node name="InventoryDisplay" type="PopupPanel" unique_id=117821498]
-oversampling_override = 1.0
-initial_position = 1
-size = Vector2i(364, 148)
-visible = true
+[node name="InventoryDisplay" type="PanelContainer" unique_id=503631675]
+offset_right = 220.0
+offset_bottom = 126.0
 script = ExtResource("1_i8x1k")
-editable = null
 
-[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
-[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
-[connection signal="child_order_changed" from="." to="." method="_on_child_order_changed"]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2120460434]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=1207436312]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Title" type="Label" parent="VBoxContainer/PanelContainer" unique_id=952801271]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Test"
+horizontal_alignment = 1
+
+[node name="TopBar" type="HBoxContainer" parent="VBoxContainer/PanelContainer" unique_id=2116174584]
+layout_mode = 2
+alignment = 2
+
+[node name="CloseButton" type="Button" parent="VBoxContainer/PanelContainer/TopBar" unique_id=726041805]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "X"
+
+[node name="Slots" type="Control" parent="VBoxContainer" unique_id=1677102306]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InventoryDisplayItem" parent="VBoxContainer/Slots" unique_id=1776272160 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem2" parent="VBoxContainer/Slots" unique_id=762766180 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem3" parent="VBoxContainer/Slots" unique_id=1921754761 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem4" parent="VBoxContainer/Slots" unique_id=2080003060 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem5" parent="VBoxContainer/Slots" unique_id=570564679 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem6" parent="VBoxContainer/Slots" unique_id=1630672293 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem7" parent="VBoxContainer/Slots" unique_id=596469451 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem8" parent="VBoxContainer/Slots" unique_id=2078883494 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem9" parent="VBoxContainer/Slots" unique_id=1360499374 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem10" parent="VBoxContainer/Slots" unique_id=1732575506 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem11" parent="VBoxContainer/Slots" unique_id=1030238683 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem12" parent="VBoxContainer/Slots" unique_id=1757647638 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem13" parent="VBoxContainer/Slots" unique_id=350856067 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem14" parent="VBoxContainer/Slots" unique_id=1938525188 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem15" parent="VBoxContainer/Slots" unique_id=499721386 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem16" parent="VBoxContainer/Slots" unique_id=1182080451 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem17" parent="VBoxContainer/Slots" unique_id=1149930111 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem18" parent="VBoxContainer/Slots" unique_id=1726061599 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem19" parent="VBoxContainer/Slots" unique_id=530858035 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem20" parent="VBoxContainer/Slots" unique_id=755442598 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem21" parent="VBoxContainer/Slots" unique_id=233988797 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem22" parent="VBoxContainer/Slots" unique_id=600026400 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem23" parent="VBoxContainer/Slots" unique_id=318516560 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem24" parent="VBoxContainer/Slots" unique_id=2109331940 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem25" parent="VBoxContainer/Slots" unique_id=750898515 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem26" parent="VBoxContainer/Slots" unique_id=1779290255 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem27" parent="VBoxContainer/Slots" unique_id=1275275267 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem28" parent="VBoxContainer/Slots" unique_id=1577020263 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem29" parent="VBoxContainer/Slots" unique_id=1497432468 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem30" parent="VBoxContainer/Slots" unique_id=2098563710 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem31" parent="VBoxContainer/Slots" unique_id=578110425 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem32" parent="VBoxContainer/Slots" unique_id=1869561922 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem33" parent="VBoxContainer/Slots" unique_id=2132103295 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem34" parent="VBoxContainer/Slots" unique_id=1048832233 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem35" parent="VBoxContainer/Slots" unique_id=1290874120 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem36" parent="VBoxContainer/Slots" unique_id=235942327 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem37" parent="VBoxContainer/Slots" unique_id=52808714 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem38" parent="VBoxContainer/Slots" unique_id=976521839 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem39" parent="VBoxContainer/Slots" unique_id=1181580489 instance=ExtResource("2_7vh03")]
+layout_mode = 0
+
+[node name="InventoryDisplayItem40" parent="VBoxContainer/Slots" unique_id=1358697500 instance=ExtResource("2_7vh03")]
+layout_mode = 0

@@ -1,15 +1,28 @@
 [gd_scene format=3 uid="uid://bh1kph1si1x55"]
 
-[ext_resource type="Texture2D" uid="uid://iew0loibyhx4" path="res://icon.svg" id="1_lvltf"]
 [ext_resource type="Script" uid="uid://det7bn0igmpa1" path="res://hud/inventory_display/inventory_display_item/inventory_display_item.gd" id="1_y5ije"]
 
+[sub_resource type="Gradient" id="Gradient_w8wls"]
+interpolation_mode = 1
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_y5ije"]
+gradient = SubResource("Gradient_w8wls")
+width = 24
+height = 24
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
 [node name="InventoryDisplayItem" type="TextureButton" unique_id=1776272160]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 24.0
+offset_bottom = 24.0
 offset_transform_enabled = true
 offset_transform_visual_only = false
 button_mask = 7
-texture_normal = ExtResource("1_lvltf")
+texture_normal = SubResource("GradientTexture2D_y5ije")
 script = ExtResource("1_y5ije")
 
 [connection signal="button_down" from="." to="." method="_on_button_down"]

@@ -1,4 +1,6 @@
 class_name SlotArranger extends Object
+# When I want to make a script to extend another script's functionality,
+# I wonder if extending from Object is good.
 
 
 # In this case, the signal isn't a reaction, but a trigger. Hence the present-tense.

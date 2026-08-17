@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b7r7sotyreews"]
 
 [ext_resource type="Script" uid="uid://bcqo441k50fq7" path="res://hud/hud.gd" id="1_6ca3a"]
+[ext_resource type="PackedScene" uid="uid://d1n0a6to48d4x" path="res://hud/inventory_display/hotbar/hotbar.tscn" id="2_2gk58"]
 
 [node name="HUD" type="CanvasLayer" unique_id=955463685]
 script = ExtResource("1_6ca3a")
@@ -24,3 +25,5 @@ offset_right = 39.0
 offset_bottom = 187.0
 max_value = 1000.0
 fill_mode = 3
+
+[node name="Hotbar" parent="." unique_id=1597752203 instance=ExtResource("2_2gk58")]
