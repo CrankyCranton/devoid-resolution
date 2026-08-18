@@ -29,3 +29,7 @@ func _on_slot_arranger_arrange_child(child: Node, index: int, _children: Array[N
 	child.position.x += (spacing_h / 2.0) * (coords.y % 2)
 
 	slots.custom_minimum_size = slots.custom_minimum_size.max(child.position + child.size)
+
+
+func _on_close_button_pressed() -> void:
+	hide()

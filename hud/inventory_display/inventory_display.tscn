@@ -154,3 +154,5 @@ layout_mode = 0
 
 [node name="InventoryDisplayItem40" parent="VBoxContainer/Slots" unique_id=1358697500 instance=ExtResource("2_7vh03")]
 layout_mode = 0
+
+[connection signal="pressed" from="VBoxContainer/PanelContainer/TopBar/CloseButton" to="." method="_on_close_button_pressed"]
