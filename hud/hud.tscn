@@ -26,4 +26,26 @@ offset_bottom = 187.0
 max_value = 1000.0
 fill_mode = 3
 
+[node name="MenuDim" type="ColorRect" parent="." unique_id=482467086]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="Menus" type="HFlowContainer" parent="MenuDim" unique_id=1764517179]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
 [node name="Hotbar" parent="." unique_id=1597752203 instance=ExtResource("2_2gk58")]
+
+[connection signal="child_exiting_tree" from="MenuDim/Menus" to="." method="_on_menus_child_exiting_tree"]

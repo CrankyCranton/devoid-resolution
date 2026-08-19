@@ -9,13 +9,19 @@ class_name SlotArranger extends Object
 signal arrange_child(child: Node, index: int, children: Array[Node])
 
 var owner: Node
+var inventory: Inventory
 
 
-func _init(owner: Node) -> void:
+func _init(owner: Node, inventory: Inventory) -> void:
 	self.owner = owner
+	self.inventory = inventory
 	owner.child_entered_tree.connect(_on_owner_child_entered_tree)
 	owner.child_exiting_tree.connect(_on_owner_child_exiting_tree)
 	owner.child_order_changed.connect(_on_owner_child_order_changed)
+	if owner.is_node_ready():
+		_on_owner_ready()
+	else:
+		owner.ready.connect(_on_owner_ready)
 
 
 func arrange(ignore_nodes: Array[Node] = []) -> void:
@@ -25,6 +31,16 @@ func arrange(ignore_nodes: Array[Node] = []) -> void:
 	for child: Node in children:
 		arrange_child.emit(child, i, children.duplicate())
 		i += 1
+
+
+func _on_owner_ready() -> void:
+	for i: int in (inventory as Inventory).max_slots:
+		var slot: InventoryDisplaySlot = preload("uid://dipfyhh8m6f18").instantiate()
+		slot.inventory = inventory
+		slot.index = i
+		owner.add_child(slot)
+		if inventory.items.has(i):
+			slot.create_item.callv(inventory.items[i])
 
 
 func _on_owner_child_entered_tree(_node: Node) -> void:

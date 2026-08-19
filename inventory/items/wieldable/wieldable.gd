@@ -1,4 +1,4 @@
-class_name Item extends Node2D
+class_name Wieldable extends Node2D
 
 
 #@export var turn_speed: float = 15.0

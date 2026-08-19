@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d1n0a6to48d4x"]
 
 [ext_resource type="Script" uid="uid://md5285367bjq" path="res://hud/inventory_display/hotbar/hotbar.gd" id="1_w8wls"]
+[ext_resource type="Resource" uid="uid://gvype5k4y7rt" path="res://inventory/hotbar_inv.tres" id="2_wllmm"]
 
 [sub_resource type="Curve2D" id="Curve2D_bnswj"]
 _data = {
@@ -8,70 +9,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Gradient" id="Gradient_w8wls"]
-interpolation_mode = 1
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-metadata/_snap_enabled = true
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_qcud2"]
-gradient = SubResource("Gradient_w8wls")
-width = 24
-height = 24
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.5, 0)
-metadata/_snap_enabled = true
-
 [node name="Hotbar" type="Path2D" unique_id=1597752203]
 curve = SubResource("Curve2D_bnswj")
 script = ExtResource("1_w8wls")
-
-[node name="TextureButton" type="TextureButton" parent="." unique_id=1223263162]
-offset_right = 24.0
-offset_bottom = 24.0
-texture_normal = SubResource("GradientTexture2D_qcud2")
-
-[node name="TextureButton2" type="TextureButton" parent="." unique_id=1755819390]
-offset_right = 24.0
-offset_bottom = 24.0
-texture_normal = SubResource("GradientTexture2D_qcud2")
-
-[node name="TextureButton3" type="TextureButton" parent="." unique_id=1213484750]
-offset_right = 24.0
-offset_bottom = 24.0
-texture_normal = SubResource("GradientTexture2D_qcud2")
-
-[node name="TextureButton4" type="TextureButton" parent="." unique_id=1060316813]
-offset_right = 24.0
-offset_bottom = 24.0
-texture_normal = SubResource("GradientTexture2D_qcud2")
-
-[node name="TextureButton5" type="TextureButton" parent="." unique_id=122193094]
-offset_right = 24.0
-offset_bottom = 24.0
-texture_normal = SubResource("GradientTexture2D_qcud2")
-
-[node name="TextureButton6" type="TextureButton" parent="." unique_id=2066353023]
-offset_right = 24.0
-offset_bottom = 24.0
-texture_normal = SubResource("GradientTexture2D_qcud2")
-
-[node name="TextureButton7" type="TextureButton" parent="." unique_id=1758003599]
-offset_right = 24.0
-offset_bottom = 24.0
-texture_normal = SubResource("GradientTexture2D_qcud2")
-
-[node name="TextureButton8" type="TextureButton" parent="." unique_id=1407624854]
-offset_right = 24.0
-offset_bottom = 24.0
-texture_normal = SubResource("GradientTexture2D_qcud2")
-
-[node name="TextureButton9" type="TextureButton" parent="." unique_id=1448714817]
-offset_right = 24.0
-offset_bottom = 24.0
-texture_normal = SubResource("GradientTexture2D_qcud2")
-
-[node name="TextureButton10" type="TextureButton" parent="." unique_id=91429890]
-offset_right = 24.0
-offset_bottom = 24.0
-texture_normal = SubResource("GradientTexture2D_qcud2")
+inventory = ExtResource("2_wllmm")

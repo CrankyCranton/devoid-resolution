@@ -5,8 +5,9 @@ class_name InventoryDisplay extends PanelContainer
 @export var columns: int = 8
 @export var editable := true
 
+@onready var title: Label = %Title
 @onready var slots: Control = %Slots
-@onready var slot_arranger := SlotArranger.new(slots)
+@onready var slot_arranger := SlotArranger.new(slots, inventory)
 
 
 func _ready() -> void:
@@ -32,4 +33,4 @@ func _on_slot_arranger_arrange_child(child: Node, index: int, _children: Array[N
 
 
 func _on_close_button_pressed() -> void:
-	hide()
+	queue_free()

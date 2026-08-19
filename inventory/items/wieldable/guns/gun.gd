@@ -1,4 +1,4 @@
-class_name Gun extends Item
+class_name Gun extends Wieldable
 
 
 signal hurt(hitbox: Hitbox)

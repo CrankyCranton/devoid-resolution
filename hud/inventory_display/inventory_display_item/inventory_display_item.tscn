@@ -16,6 +16,9 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 metadata/_snap_enabled = true
 
+[sub_resource type="LabelSettings" id="LabelSettings_qcud2"]
+font_color = Color(0, 0, 0, 1)
+
 [node name="InventoryDisplayItem" type="TextureButton" unique_id=1776272160]
 offset_right = 24.0
 offset_bottom = 24.0
@@ -25,6 +28,19 @@ button_mask = 7
 texture_normal = SubResource("GradientTexture2D_y5ije")
 script = ExtResource("1_y5ije")
 
+[node name="CountHUD" type="Label" parent="." unique_id=616260949]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -15.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "##"
+label_settings = SubResource("LabelSettings_qcud2")
+
 [connection signal="button_down" from="." to="." method="_on_button_down"]
 [connection signal="button_up" from="." to="." method="_on_button_up"]
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]

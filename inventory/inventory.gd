@@ -2,13 +2,16 @@ class_name Inventory extends Resource
 # TODO: Think about if there will be any items like weapons that can't be stacked. If so, handle it.
 
 
+const RAND_DROP_OFFSET: float = 32.0
+
+# The use of the signals is primarily to update the inventory display.
 signal item_created(slot: int, item: PackedScene, count: int)
 signal item_deleted(slot: int)
 signal items_added(slot: int, count: int)
 signal items_subtracted(slot: int, count: int)
 signal slots_full
 
-@export var max_slots: int = 16
+@export var max_slots: int = 16 # Add support for changing max_slots dynamically in-game?
 ## Format: [<slot_idx>: [<ItemScene>, <count>]]
 @export var items: Dictionary[int, Array]
 
@@ -31,17 +34,22 @@ func add_item(item: PackedScene, count: int = 1) -> void:
 		slots_full.emit()
 
 
+# WARNING: This function allows for creating multiple stacks of the same item
+# by moving an item type you already have into a different slot.
 func move_item(from_inv: Inventory, from_slot: int, to_slot: int) -> void:
 	assert(from_slot < from_inv.max_slots)
 	assert(to_slot < max_slots)
 
 	# This code is confusing the way it repeats but doesn't. But IDK how to fix it.
-	# WARNING: The code allows for creating multiple stacks of the same item.
 	var moving_item: Array = from_inv.items[from_slot]
 	if items.has(to_slot):
 		if items[to_slot][0] == from_inv.items[from_slot][0]:
-			from_inv._delete_item(from_slot)
-			_add_items(to_slot, moving_item[1])
+			if from_slot == to_slot and from_inv == self:
+				push_warning("Moving item onto self; Move aborted.")
+				return
+			else:
+				from_inv._delete_item(from_slot)
+				_add_items(to_slot, moving_item[1])
 		else:
 			# NOTE: Performance can be increased by only emitting the item_deleted signal.
 			from_inv._delete_item(from_slot)
@@ -58,6 +66,16 @@ func remove_item(slot: int, count: int) -> void:
 	assert(slot < max_slots)
 	@warning_ignore("standalone_ternary")
 	_delete_item(slot) if items[slot][1] <= count else _subtract_items(slot, count)
+
+
+func drop_item(slot: int, count: int, caller: Node, location: Vector2) -> void:
+	assert(count <= items[slot][1])
+	for i: int in count:
+		var pickup: Pickup = preload("uid://dx02lx8hb7pll").instantiate()
+		pickup.ITEM = items[slot][0]
+		pickup.global_position = location
+		caller.add_sibling(pickup)
+	remove_item(slot, count)
 
 
 func _create_item(slot: int, item_info: Array) -> void:

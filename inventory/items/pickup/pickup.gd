@@ -22,4 +22,5 @@ class_name Pickup extends Area2D
 								state.get_node_property_value(idx, prop_idx))
 					sprites.add_child(sprite)
 
+# Might want to cache the textures into a static var if it gets too demanding on the CPU.
 @onready var sprites: Node2D = $Sprites

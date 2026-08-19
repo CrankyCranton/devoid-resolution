@@ -1,11 +1,14 @@
 class_name Hotbar extends Path2D
 
 
-var slot_arranger := SlotArranger.new(self)
+@export var inventory: Inventory
+
+@onready var slot_arranger := SlotArranger.new(self, inventory)
 
 
-func _init() -> void:
+func _ready() -> void:
 	slot_arranger.arrange_child.connect(_on_slot_arranger_arrange_child)
+	slot_arranger.arrange()
 
 
 func _on_slot_arranger_arrange_child(child: Node, index: int, children: Array[Node]) -> void:

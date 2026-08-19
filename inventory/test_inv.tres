@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Inventory" format=3 uid="uid://c4kc4u6tb3acj"]
+
+[ext_resource type="PackedScene" uid="uid://d27yvcuyrcrvh" path="res://inventory/items/wieldable/guns/test_gun.tscn" id="1_snp5g"]
+[ext_resource type="Script" uid="uid://t64picqgbn4k" path="res://inventory/inventory.gd" id="2_6bjuc"]
+[ext_resource type="PackedScene" uid="uid://b6uqx4ybutlb1" path="res://interactable/interactable.tscn" id="2_bwq5j"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("2_6bjuc")
+items = Dictionary[int, Array]({
+0: [ExtResource("1_snp5g"), 8],
+1: [ExtResource("2_bwq5j"), 2],
+4: [ExtResource("1_snp5g"), 10]
+})
+metadata/_custom_type_script = "uid://t64picqgbn4k"
