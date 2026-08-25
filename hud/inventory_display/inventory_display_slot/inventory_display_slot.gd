@@ -1,11 +1,11 @@
 class_name InventoryDisplaySlot extends TextureRect
 
 
+@export var inventory: Inventory = null
 @export var reserve_slot := false
 
 var item: InventoryDisplayItem
 var reserved_item: PackedScene = null
-var inventory: Inventory = null
 # This could also be represented through child index, but I'm keeping
 # it as a seperate variable for now to keep things simple.
 var index: int

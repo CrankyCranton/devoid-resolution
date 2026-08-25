@@ -69,11 +69,11 @@ func remove_item(slot: int, count: int) -> void:
 
 
 func drop_item(slot: int, count: int, caller: Node, location: Vector2) -> void:
-	assert(count <= items[slot][1])
+	assert(count <= items[slot][1], "Can't drop more items than exist.")
 	for i: int in count:
 		var pickup: Pickup = preload("uid://dx02lx8hb7pll").instantiate()
 		pickup.ITEM = items[slot][0]
-		pickup.global_position = location
+		pickup.global_position = location + Utils.rand_vec2_radial(RAND_DROP_OFFSET * (count - 1))
 		caller.add_sibling(pickup)
 	remove_item(slot, count)
 

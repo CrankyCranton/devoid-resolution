@@ -5,9 +5,9 @@
 
 [sub_resource type="Curve2D" id="Curve2D_bnswj"]
 _data = {
-"points": PackedVector2Array(3.650714, -113.76799, -3.650714, 113.76799, 7, 88, -52.105305, -2.954979, 52.105305, 2.954979, 179, 243)
+"points": PackedVector2Array(-55.90456, -8.473847, 55.90456, 8.473847, 8, 136, -13.280531, -7.8635178, 13.280531, 7.8635178, 88, 176, -92.627045, 0.37225914, 92.627045, -0.37225914, 216, 240)
 }
-point_count = 2
+point_count = 3
 
 [node name="Hotbar" type="Path2D" unique_id=1597752203]
 curve = SubResource("Curve2D_bnswj")

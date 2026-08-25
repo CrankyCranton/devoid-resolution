@@ -6,8 +6,8 @@ extends CanvasLayer
 @onready var menus: HFlowContainer = %Menus
 
 
-func _ready() -> void:
-	open_inventory(preload("uid://c4kc4u6tb3acj"), "Blah")
+#func _ready() -> void:
+	#open_inventory(preload("uid://c4kc4u6tb3acj"), "Blah")
 
 
 func set_corruption(corruption: int) -> void:

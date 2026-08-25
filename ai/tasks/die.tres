@@ -1,0 +1,30 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://bmsssdf8t0ons"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_247ck"]
+
+[sub_resource type="BBVariant" id="BBVariant_247ck"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_7xpq3"]
+property = &"dead"
+value = SubResource("BBVariant_247ck")
+
+[sub_resource type="BTWait" id="BTWait_v355r"]
+
+[sub_resource type="BBNode" id="BBNode_n3w0q"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_rq5hc"]
+node = SubResource("BBNode_n3w0q")
+method = &"queue_free"
+
+[sub_resource type="BTSequence" id="BTSequence_sgw7w"]
+custom_name = "Die"
+children = [SubResource("BTCheckAgentProperty_7xpq3"), SubResource("BTWait_v355r"), SubResource("BTCallMethod_rq5hc")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_247ck")
+root_task = SubResource("BTSequence_sgw7w")

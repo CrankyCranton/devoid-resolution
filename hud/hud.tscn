@@ -2,6 +2,64 @@
 
 [ext_resource type="Script" uid="uid://bcqo441k50fq7" path="res://hud/hud.gd" id="1_6ca3a"]
 [ext_resource type="PackedScene" uid="uid://d1n0a6to48d4x" path="res://hud/inventory_display/hotbar/hotbar.tscn" id="2_2gk58"]
+[ext_resource type="PackedScene" uid="uid://dipfyhh8m6f18" path="res://hud/inventory_display/inventory_display_slot/inventory_display_slot.tscn" id="4_w8tcp"]
+[ext_resource type="Resource" uid="uid://by7c486khf84a" path="res://inventory/hands_inv.tres" id="5_svhta"]
+
+[sub_resource type="Gradient" id="Gradient_2gk58"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5, 0.6)
+colors = PackedColorArray(0.45, 0.45, 0.45, 1, 0.36, 0.36, 0.36, 1, 1, 1, 1, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qcud2"]
+gradient = SubResource("Gradient_2gk58")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_318vg"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.7, 0.8, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.8, 0.16, 0.28800017, 1, 0.89459085, 0.22961372, 0.22961372, 1, 1, 1, 1, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7ec35"]
+gradient = SubResource("Gradient_318vg")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_svhta"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5, 0.6)
+colors = PackedColorArray(0.39, 0.39, 0.39, 1, 0.36, 0.36, 0.36, 1, 1, 1, 1, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_318vg"]
+gradient = SubResource("Gradient_svhta")
+width = 48
+height = 48
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_w8tcp"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.7, 0.8, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.28906643, 0.12599999, 0.63, 1, 0.37837648, 0.195, 0.75, 1, 1, 1, 1, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w8tcp"]
+gradient = SubResource("Gradient_w8tcp")
+width = 48
+height = 48
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
 
 [node name="HUD" type="CanvasLayer" unique_id=955463685]
 script = ExtResource("1_6ca3a")
@@ -18,11 +76,15 @@ mouse_filter = 2
 [node name="CorruptionBar" type="ProgressBar" parent="ControlRoot" unique_id=813136934]
 unique_name_in_owner = true
 editor_description = "Might remove if corruption isn't instant death."
-layout_mode = 0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 39.0
-offset_bottom = 187.0
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 432.0
+offset_top = -166.0
+offset_right = 452.0
+offset_bottom = -60.0
+grow_vertical = 0
 max_value = 1000.0
 fill_mode = 3
 
@@ -47,5 +109,61 @@ grow_vertical = 2
 alignment = 1
 
 [node name="Hotbar" parent="." unique_id=1597752203 instance=ExtResource("2_2gk58")]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=343906078]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -94.0
+offset_right = 72.0
+offset_bottom = -30.0
+grow_vertical = 0
+fill_mode = 4
+texture_under = SubResource("GradientTexture2D_qcud2")
+texture_over = SubResource("GradientTexture2D_7ec35")
+
+[node name="SlotHandL" parent="TextureProgressBar" unique_id=1472236627 instance=ExtResource("4_w8tcp")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+inventory = ExtResource("5_svhta")
+
+[node name="TextureProgressBar2" type="TextureProgressBar" parent="." unique_id=523527009]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = -54.0
+offset_right = 112.0
+offset_bottom = -6.0
+grow_vertical = 0
+fill_mode = 4
+texture_under = SubResource("GradientTexture2D_318vg")
+texture_over = SubResource("GradientTexture2D_w8tcp")
+
+[node name="SlotHandR" parent="TextureProgressBar2" unique_id=1507525500 instance=ExtResource("4_w8tcp")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+inventory = ExtResource("5_svhta")
 
 [connection signal="child_exiting_tree" from="MenuDim/Menus" to="." method="_on_menus_child_exiting_tree"]

@@ -3,15 +3,15 @@ class_name Follow extends Move
 
 
 @export var desired_distance: float = 32.0
+## Can be Vector2, Node2D, or NodePath.
 @warning_ignore("untyped_declaration")
-## Can be Vector2 or Node2D, or NodePath.
 @export_node_path("Node2D") var target
-@export var blackboard_sync := &""
+@export var blackboard_sync_var := &""
 
 
 func _tick(delta: float) -> Status:
-	if blackboard_sync != &"":
-		target = blackboard.get_var(blackboard_sync)
+	if blackboard_sync_var != &"":
+		target = blackboard.get_var(blackboard_sync_var)
 
 	if target is NodePath:
 		target = agent.get_node(target)

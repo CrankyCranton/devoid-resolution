@@ -1,0 +1,199 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://d2l5oum5hdhbk"]
+
+[ext_resource type="BehaviorTree" uid="uid://bmsssdf8t0ons" path="res://ai/tasks/die.tres" id="1_kicmj"]
+[ext_resource type="Script" uid="uid://sc3476ucsq60" path="res://ai/tasks/rotator.gd" id="3_68r04"]
+[ext_resource type="Script" uid="uid://baifofimflsil" path="res://ai/tasks/move.gd" id="4_ty30h"]
+[ext_resource type="Script" uid="uid://c6eidqewkh871" path="res://ai/tasks/pick_wander_dir.gd" id="5_ycpvx"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_427j3"]
+var/target/name = &"target"
+var/target/type = 24
+var/target/hint = 0
+var/target/hint_string = ""
+var/wander_dir/name = &"wander_dir"
+var/wander_dir/type = 5
+var/wander_dir/value = Vector2(0, 0)
+var/wander_dir/hint = 0
+var/wander_dir/hint_string = ""
+var/FORWARD/name = &"FORWARD"
+var/FORWARD/type = 5
+var/FORWARD/value = Vector2(1, 0)
+var/FORWARD/hint = 0
+var/FORWARD/hint_string = ""
+var/search_point/name = &"search_point"
+var/search_point/type = 5
+var/search_point/value = Vector2(0, 0)
+var/search_point/hint = 0
+var/search_point/hint_string = ""
+binding/target = NodePath(".:player")
+binding/search_point = NodePath(".:search_point")
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_q00nh"]
+
+[sub_resource type="BTSubtree" id="BTSubtree_5km0o"]
+subtree = ExtResource("1_kicmj")
+blackboard_plan = SubResource("BlackboardPlan_q00nh")
+
+[sub_resource type="BBVariant" id="BBVariant_ss6dp"]
+saved_value = null
+resource_name = "<null>"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_15vqh"]
+variable = &"target"
+check_type = 5
+value = SubResource("BBVariant_ss6dp")
+
+[sub_resource type="BTAction" id="BTAction_l7j7h"]
+script = ExtResource("3_68r04")
+target = null
+blackboard_sync = &"target"
+
+[sub_resource type="BTAction" id="BTAction_324fl"]
+script = ExtResource("4_ty30h")
+speed = 96.0
+accel = 10.0
+decel = 10.0
+direction_var = "FORWARD"
+relative_dir = true
+
+[sub_resource type="BTParallel" id="BTParallel_qao1d"]
+num_successes_required = 2
+num_failures_required = 2
+repeat = true
+children = [SubResource("BTAction_l7j7h"), SubResource("BTAction_324fl")]
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_81gk7"]
+custom_name = "Chase"
+children = [SubResource("BTCheckVar_15vqh"), SubResource("BTParallel_qao1d")]
+
+[sub_resource type="BBVariant" id="BBVariant_kicmj"]
+type = 5
+saved_value = Vector2(inf, inf)
+resource_name = "(inf, inf)"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_28xhj"]
+variable = &"search_point"
+check_type = 5
+value = SubResource("BBVariant_kicmj")
+
+[sub_resource type="BTAction" id="BTAction_68r04"]
+script = ExtResource("3_68r04")
+target = null
+blackboard_sync = &"search_point"
+turn_speed = 10.0
+
+[sub_resource type="BTAction" id="BTAction_ty30h"]
+script = ExtResource("4_ty30h")
+speed = 64.0
+accel = 10.0
+decel = 10.0
+direction_var = "FORWARD"
+relative_dir = true
+
+[sub_resource type="BTParallel" id="BTParallel_ycpvx"]
+num_successes_required = 2
+num_failures_required = 2
+repeat = true
+children = [SubResource("BTAction_68r04"), SubResource("BTAction_ty30h")]
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_kicmj"]
+children = [SubResource("BTParallel_ycpvx")]
+
+[sub_resource type="BBVariant" id="BBVariant_28xhj"]
+type = 5
+saved_value = Vector2(inf, inf)
+resource_name = "(inf, inf)"
+
+[sub_resource type="BTSetVar" id="BTSetVar_68r04"]
+variable = &"search_point"
+value = SubResource("BBVariant_28xhj")
+
+[sub_resource type="BTSequence" id="BTSequence_ty30h"]
+children = [SubResource("BTTimeLimit_kicmj"), SubResource("BTSetVar_68r04")]
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_8e0rm"]
+custom_name = "Search"
+children = [SubResource("BTCheckVar_28xhj"), SubResource("BTSequence_ty30h")]
+
+[sub_resource type="BBVariant" id="BBVariant_7vu65"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_fplfh"]
+property = &"on_wall"
+value = SubResource("BBVariant_7vu65")
+
+[sub_resource type="BTAction" id="BTAction_fplfh"]
+custom_name = "PickWanderDirWall"
+script = ExtResource("5_ycpvx")
+output_var = "wander_dir"
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_324fl"]
+children = [SubResource("BTCheckAgentProperty_fplfh"), SubResource("BTAction_fplfh")]
+
+[sub_resource type="BTCooldown" id="BTCooldown_324fl"]
+duration = 1.0
+children = [SubResource("BTDynamicSequence_324fl")]
+
+[sub_resource type="BTAlwaysFail" id="BTAlwaysFail_kicmj"]
+children = [SubResource("BTCooldown_324fl")]
+
+[sub_resource type="BTAction" id="BTAction_28xhj"]
+script = ExtResource("5_ycpvx")
+output_var = "wander_dir"
+
+[sub_resource type="BTAction" id="BTAction_7vu65"]
+script = ExtResource("3_68r04")
+target = null
+blackboard_sync = &"wander_dir"
+relative = true
+turn_speed = 5.0
+
+[sub_resource type="BTAction" id="BTAction_5km0o"]
+script = ExtResource("4_ty30h")
+speed = 32.0
+accel = 10.0
+decel = 10.0
+direction_var = "FORWARD"
+relative_dir = true
+
+[sub_resource type="BTParallel" id="BTParallel_fplfh"]
+num_successes_required = 2
+num_failures_required = 2
+repeat = true
+children = [SubResource("BTAction_7vu65"), SubResource("BTAction_5km0o")]
+
+[sub_resource type="BTSequence" id="BTSequence_28xhj"]
+children = [SubResource("BTAction_28xhj"), SubResource("BTParallel_fplfh")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_28xhj"]
+custom_name = "Wander"
+children = [SubResource("BTAlwaysFail_kicmj"), SubResource("BTSequence_28xhj")]
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_324fl"]
+time_limit = 10.0
+children = [SubResource("BTDynamicSelector_28xhj")]
+
+[sub_resource type="BTRandomWait" id="BTRandomWait_324fl"]
+max_duration = 5.0
+
+[sub_resource type="BTAction" id="BTAction_15vqh"]
+script = ExtResource("4_ty30h")
+speed = 0.0
+accel = 5.0
+decel = 5.0
+
+[sub_resource type="BTParallel" id="BTParallel_kicmj"]
+custom_name = "Idle"
+children = [SubResource("BTRandomWait_324fl"), SubResource("BTAction_15vqh")]
+
+[sub_resource type="BTRandomSelector" id="BTRandomSelector_324fl"]
+children = [SubResource("BTTimeLimit_324fl"), SubResource("BTParallel_kicmj")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_81gk7"]
+children = [SubResource("BTSubtree_5km0o"), SubResource("BTDynamicSequence_81gk7"), SubResource("BTDynamicSequence_8e0rm"), SubResource("BTRandomSelector_324fl")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_427j3")
+root_task = SubResource("BTDynamicSelector_81gk7")

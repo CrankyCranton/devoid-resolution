@@ -54,4 +54,8 @@ magazine = SubResource("Resource_ui20s")
 hitboxes = [NodePath("../Hitbox")]
 heartless = true
 
+[node name="Camera2D" type="Camera2D" parent="." unique_id=481115355]
+zoom = Vector2(0.3, 0.3)
+position_smoothing_enabled = true
+
 [connection signal="died" from="Health" to="." method="_on_health_died"]

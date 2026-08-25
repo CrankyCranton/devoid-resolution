@@ -32,7 +32,9 @@ gdscript/warnings/untyped_declaration=1
 
 window/size/viewport_width=480
 window/size/viewport_height=270
+window/size/mode=3
 window/stretch/mode="canvas_items"
+window/size/mode.editor=0
 
 [editor_plugins]
 
@@ -41,14 +43,15 @@ enabled=PackedStringArray("res://addons/rmsmartshape/plugin.cfg", "res://addons/
 [file_customization]
 
 folder_colors={
-"res://assets/": "yellow",
+"res://ai/": "gray",
+"res://assets/": "purple",
 "res://combat/": "blue",
-"res://creatures/": "purple",
+"res://creatures/": "teal",
 "res://hud/": "green",
-"res://interactable/": "red",
-"res://inventory/": "pink",
-"res://levels/": "gray",
-"res://vfx/": "teal"
+"res://interactable/": "yellow",
+"res://inventory/": "orange",
+"res://levels/": "red",
+"res://vfx/": "pink"
 }
 
 [gui]

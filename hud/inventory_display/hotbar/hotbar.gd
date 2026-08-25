@@ -13,4 +13,4 @@ func _ready() -> void:
 
 func _on_slot_arranger_arrange_child(child: Node, index: int, children: Array[Node]) -> void:
 	var path_length: float = curve.get_baked_length() # WARNING: Could be performance heavy.
-	child.position = curve.sample_baked((float(index + 1) / children.size()) * path_length)
+	child.position = curve.sample_baked((float(index) / children.size()) * path_length)

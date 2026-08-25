@@ -1,4 +1,5 @@
 class_name Sight extends Area2D
+# Creating a heatmap for sight awareness would be cool.
 
 
 signal collider_entered(collider: Node2D)
@@ -6,6 +7,7 @@ signal collider_exited(collider: Node2D)
 
 # Wondering if I should create a small convenience class for random ranges.
 # But then it would need to have flexibility for things like int vs float, etc.
+# Should the notice time be multiplied by awareness? Or maybe by the player's reputation?
 @export var min_notice_time: float = 0.5 
 @export var max_notice_time: float = 3.0
 
@@ -32,6 +34,7 @@ func _physics_process(delta: float) -> void:
 				notice_times[collider][0] += delta
 			else:
 				notice_times[collider] = [0.0, randf_range(min_notice_time, max_notice_time)]
+
 			if notice_times[collider][0] >= notice_times[collider][1]:
 				visible_colliders.append(collider)
 				collider_entered.emit(collider)

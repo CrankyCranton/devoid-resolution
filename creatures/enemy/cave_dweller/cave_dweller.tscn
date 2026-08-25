@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://d3nsofkm343n4"]
+
+[ext_resource type="PackedScene" uid="uid://dc4ob1ecpbqo6" path="res://creatures/enemy/enemy.tscn" id="1_845mc"]
+[ext_resource type="Script" uid="uid://b1s5a7803yos3" path="res://creatures/enemy/cave_dweller/cave_dweller.gd" id="2_845mc"]
+[ext_resource type="PackedScene" uid="uid://li5dweujrwo4" path="res://creatures/enemy/sight/sight.tscn" id="3_deku7"]
+[ext_resource type="BehaviorTree" uid="uid://d2l5oum5hdhbk" path="res://creatures/enemy/cave_dweller/cave_dweller.tres" id="4_845mc"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_qao1d"]
+binding/target = NodePath("..:player")
+binding/search_point = NodePath("..:search_point")
+
+[node name="CaveDweller" unique_id=1896433514 instance=ExtResource("1_845mc")]
+script = ExtResource("2_845mc")
+search_point = Vector2(inf, inf)
+
+[node name="Sight" parent="." index="0" unique_id=734266294 instance=ExtResource("3_deku7")]
+
+[node name="BTPlayer" parent="." index="5" unique_id=817829925]
+behavior_tree = ExtResource("4_845mc")
+blackboard_plan = SubResource("BlackboardPlan_qao1d")
+
+[connection signal="collider_entered" from="Sight" to="." method="_on_sight_collider_entered"]
+[connection signal="collider_exited" from="Sight" to="." method="_on_sight_collider_exited"]
+[connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
+
+[editable path="Sight"]
