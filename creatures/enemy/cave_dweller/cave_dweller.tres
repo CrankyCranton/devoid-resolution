@@ -50,10 +50,10 @@ blackboard_sync = &"target"
 
 [sub_resource type="BTAction" id="BTAction_324fl"]
 script = ExtResource("4_ty30h")
-speed = 96.0
-accel = 10.0
-decel = 10.0
-direction_var = "FORWARD"
+speed = 192.0
+accel = 7.0
+decel = 1.0
+direction_var_str = &"FORWARD"
 relative_dir = true
 
 [sub_resource type="BTParallel" id="BTParallel_qao1d"]
@@ -87,7 +87,7 @@ script = ExtResource("4_ty30h")
 speed = 64.0
 accel = 10.0
 decel = 10.0
-direction_var = "FORWARD"
+direction_var_str = &"FORWARD"
 relative_dir = true
 
 [sub_resource type="BTParallel" id="BTParallel_ycpvx"]
@@ -155,7 +155,7 @@ script = ExtResource("4_ty30h")
 speed = 32.0
 accel = 10.0
 decel = 10.0
-direction_var = "FORWARD"
+direction_var_str = &"FORWARD"
 relative_dir = true
 
 [sub_resource type="BTParallel" id="BTParallel_fplfh"]
@@ -183,10 +183,14 @@ script = ExtResource("4_ty30h")
 speed = 0.0
 accel = 5.0
 decel = 5.0
+direction_var_str = &"FORWARD"
+
+[sub_resource type="BTComment" id="BTComment_324fl"]
+custom_name = "Rotate randomly?"
 
 [sub_resource type="BTParallel" id="BTParallel_kicmj"]
 custom_name = "Idle"
-children = [SubResource("BTRandomWait_324fl"), SubResource("BTAction_15vqh")]
+children = [SubResource("BTRandomWait_324fl"), SubResource("BTAction_15vqh"), SubResource("BTComment_324fl")]
 
 [sub_resource type="BTRandomSelector" id="BTRandomSelector_324fl"]
 children = [SubResource("BTTimeLimit_324fl"), SubResource("BTParallel_kicmj")]

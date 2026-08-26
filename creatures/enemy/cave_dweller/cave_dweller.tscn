@@ -15,6 +15,9 @@ search_point = Vector2(inf, inf)
 
 [node name="Sight" parent="." index="0" unique_id=734266294 instance=ExtResource("3_deku7")]
 
+[node name="CollisionPolygon2D" parent="Sight" index="0" unique_id=2135666165]
+polygon = PackedVector2Array(-48, 0, -24, 40, 0, 128, 320, 256, 480, 0, 320, -256, 0, -128, -24, -40)
+
 [node name="BTPlayer" parent="." index="5" unique_id=817829925]
 behavior_tree = ExtResource("4_845mc")
 blackboard_plan = SubResource("BlackboardPlan_qao1d")
