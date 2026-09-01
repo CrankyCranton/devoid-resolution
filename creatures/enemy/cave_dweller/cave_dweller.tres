@@ -43,11 +43,6 @@ variable = &"target"
 check_type = 5
 value = SubResource("BBVariant_ss6dp")
 
-[sub_resource type="BTAction" id="BTAction_l7j7h"]
-script = ExtResource("3_68r04")
-target = null
-blackboard_sync = &"target"
-
 [sub_resource type="BTAction" id="BTAction_324fl"]
 script = ExtResource("4_ty30h")
 speed = 192.0
@@ -56,15 +51,70 @@ decel = 1.0
 direction_var_str = &"FORWARD"
 relative_dir = true
 
+[sub_resource type="BTAction" id="BTAction_l7j7h"]
+script = ExtResource("3_68r04")
+target = null
+blackboard_sync = &"target"
+desired_difference = 3.0
+
 [sub_resource type="BTParallel" id="BTParallel_qao1d"]
-num_successes_required = 2
+children = [SubResource("BTAction_324fl"), SubResource("BTAction_l7j7h")]
+
+[sub_resource type="BBVariant" id="BBVariant_324fl"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_kicmj"]
+property = &"is_within_range"
+value = SubResource("BBVariant_324fl")
+
+[sub_resource type="BTAction" id="BTAction_kicmj"]
+script = ExtResource("4_ty30h")
+decel = 5.0
+direction_var_str = &"FORWARD"
+relative_dir = true
+
+[sub_resource type="BBNode" id="BBNode_kicmj"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_28xhj"]
+animation_player = SubResource("BBNode_kicmj")
+animation_name = &"attack"
+
+[sub_resource type="BBNode" id="BBNode_324fl"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTAwaitAnimation" id="BTAwaitAnimation_kicmj"]
+animation_player = SubResource("BBNode_324fl")
+animation_name = &"attack"
+
+[sub_resource type="BTSequence" id="BTSequence_kicmj"]
+children = [SubResource("BTPlayAnimation_28xhj"), SubResource("BTAwaitAnimation_kicmj")]
+
+[sub_resource type="BTParallel" id="BTParallel_68r04"]
 num_failures_required = 2
-repeat = true
-children = [SubResource("BTAction_l7j7h"), SubResource("BTAction_324fl")]
+children = [SubResource("BTAction_kicmj"), SubResource("BTSequence_kicmj")]
+
+[sub_resource type="BTAction" id="BTAction_ycpvx"]
+script = ExtResource("4_ty30h")
+speed = 0.0
+decel = 5.0
+
+[sub_resource type="BTWait" id="BTWait_8e0rm"]
+
+[sub_resource type="BTParallel" id="BTParallel_4sgjo"]
+num_failures_required = 2
+children = [SubResource("BTAction_ycpvx"), SubResource("BTWait_8e0rm")]
+
+[sub_resource type="BTSequence" id="BTSequence_324fl"]
+children = [SubResource("BTParallel_qao1d"), SubResource("BTCheckAgentProperty_kicmj"), SubResource("BTParallel_68r04"), SubResource("BTParallel_4sgjo")]
 
 [sub_resource type="BTDynamicSequence" id="BTDynamicSequence_81gk7"]
 custom_name = "Chase"
-children = [SubResource("BTCheckVar_15vqh"), SubResource("BTParallel_qao1d")]
+children = [SubResource("BTCheckVar_15vqh"), SubResource("BTSequence_324fl")]
 
 [sub_resource type="BBVariant" id="BBVariant_kicmj"]
 type = 5

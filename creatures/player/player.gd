@@ -15,6 +15,11 @@ var corruption: int = 0:
 		HUD.set_corruption(corruption)
 
 
+func _ready() -> void:
+	HUD.set_max_health(health.max_health)
+	HUD.set_health(health.health)
+
+
 func _physics_process(delta: float) -> void:
 	rotation = lerp_angle(rotation, global_position.angle_to_point(get_global_mouse_position()),
 			TURN_SPEED * delta)
@@ -32,3 +37,11 @@ func _input(event: InputEvent) -> void:
 
 func _on_health_died(_krama: int) -> void:
 	get_tree().paused = true
+
+
+func _on_health_health_changed(health: int) -> void:
+	HUD.set_health(health)
+
+
+func _on_health_max_health_changed(max_health: int) -> void:
+	HUD.set_max_health(max_health)

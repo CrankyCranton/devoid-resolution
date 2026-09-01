@@ -110,7 +110,7 @@ alignment = 1
 
 [node name="Hotbar" parent="." unique_id=1597752203 instance=ExtResource("2_2gk58")]
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=343906078]
+[node name="HealthBar" type="TextureProgressBar" parent="." unique_id=343906078]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -119,11 +119,12 @@ offset_top = -94.0
 offset_right = 72.0
 offset_bottom = -30.0
 grow_vertical = 0
+value = 100.0
 fill_mode = 4
 texture_under = SubResource("GradientTexture2D_qcud2")
-texture_over = SubResource("GradientTexture2D_7ec35")
+texture_progress = SubResource("GradientTexture2D_7ec35")
 
-[node name="SlotHandL" parent="TextureProgressBar" unique_id=1472236627 instance=ExtResource("4_w8tcp")]
+[node name="SlotHandL" parent="HealthBar" unique_id=1472236627 instance=ExtResource("4_w8tcp")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -147,9 +148,10 @@ offset_top = -54.0
 offset_right = 112.0
 offset_bottom = -6.0
 grow_vertical = 0
+value = 100.0
 fill_mode = 4
 texture_under = SubResource("GradientTexture2D_318vg")
-texture_over = SubResource("GradientTexture2D_w8tcp")
+texture_progress = SubResource("GradientTexture2D_w8tcp")
 
 [node name="SlotHandR" parent="TextureProgressBar2" unique_id=1507525500 instance=ExtResource("4_w8tcp")]
 layout_mode = 1

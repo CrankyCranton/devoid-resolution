@@ -50,6 +50,7 @@ texture = SubResource("GradientTexture2D_iuxou")
 shape = SubResource("CircleShape2D_qcud2")
 
 [node name="Hitbox" parent="." unique_id=713050216 instance=ExtResource("2_bm2dv")]
+collision_layer = 512
 
 [node name="Health" parent="." unique_id=1038555171 node_paths=PackedStringArray("hitboxes") instance=ExtResource("3_iuxou")]
 hitboxes = [NodePath("../Hitbox")]

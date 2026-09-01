@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var corruption_bar: ProgressBar = %CorruptionBar
 @onready var menu_dim: ColorRect = $MenuDim
 @onready var menus: HFlowContainer = %Menus
+@onready var health_bar: TextureProgressBar = $HealthBar
 
 
 #func _ready() -> void:
@@ -12,6 +13,14 @@ extends CanvasLayer
 
 func set_corruption(corruption: int) -> void:
 	corruption_bar.value = corruption
+
+
+func set_health(health: int) -> void:
+	health_bar.value = health
+
+
+func set_max_health(max_health: int) -> void:
+	health_bar.max_value = max_health
 
 
 func open_inventory(inventory: Inventory, title := "Items") -> void:

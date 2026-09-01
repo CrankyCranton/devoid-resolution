@@ -25,14 +25,26 @@ signal max_health_changed(max_health: int)
 # Might want to seperate into a condition to make it applicable regardless of current health.
 # In that case, there should also be a system to auto-stop bleeding over time,
 # like in Shattered Pixel Dungeon.
+# Thick blood can be represented through bleed damage resistance.
+# Perhaps it can connected to temperature?
+#func _process():
+#	health -= bleed
+#	bleed -= congelation
+#	if bandage:
+#		# Bandages should be able to completely patch up bleed damage for the most part.
+#		bleed -= bandage
 # TODO: Once bleed damage is converted to a condition, add the bleed damage to corruption.
 @export var bleed_rate: Curve
+@export var immune_time: float = 0.0
 @export var vulnerabilities: Dictionary[Damage.Type, float]
 
+var immune_timer := Timer.new()
+var immune := false
 var time_since_bled: float = 0.0
 # TODO: Apply corruption to friendlies as well (any creature that's not the player or a boss).
 # Instead of exclusively bosses and the player,
 # maybe it doesn't apply to any creature with a "heartless" trait.
+# Perhaps heart is a float multiplier. Call "warmth", "soul", or "sentience"?
 # Change corruption to infamy/adrenaline, remove the instant death if corruption goes too high,
 # and instead permanently reduce max health, and increase enemy agression/spawn rate
 # on the level tied to the infamy?
@@ -43,10 +55,12 @@ var karma: int = 0:
 		karma = value
 		karma_changed.emit(karma)
 var already_released_karma := false
-var player: Player = null # Recorded if the player hit the enemy.
+var player: Player = null # Recorded if the player hit the enemy. NOTE: The player can hit himself.
 
 
 func _ready() -> void:
+	if immune_time > 0.0:
+		_init_immune_timer()
 	for hitbox: Hitbox in hitboxes:
 		hitbox.hit.connect(_on_hitbox_hit)
 
@@ -64,6 +78,13 @@ func _process(delta: float) -> void:
 			time_until_next_bleed = 1.0 / bleed_rate.sample(health)
 	else:
 		time_since_bled = 0.0
+
+
+func _init_immune_timer() -> void:
+	immune_timer.one_shot = true
+	immune_timer.wait_time = immune_time
+	immune_timer.timeout.connect(_on_immune_timer_timout)
+	add_child(immune_timer)
 
 
 func heal(healing: int) -> void:
@@ -99,6 +120,17 @@ func take_damage(damage: Damage, instigator: Node = null) -> void:
 
 
 func _on_hitbox_hit(damage: Damage, instigator: Node) -> void:
+	if immune:
+		return
+
 	if instigator is Player:
 		player = instigator
 	take_damage(damage, instigator)
+
+	if immune_time > 0.0:
+		immune = true
+		immune_timer.start()
+
+
+func _on_immune_timer_timout() -> void:
+	immune = false

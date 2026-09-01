@@ -23,6 +23,10 @@ metadata/_snap_enabled = true
 [sub_resource type="CircleShape2D" id="CircleShape2D_wnj1o"]
 radius = 16.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ui20s"]
+resource_local_to_scene = true
+radius = 8.0
+
 [sub_resource type="Resource" id="Resource_ui20s"]
 resource_local_to_scene = true
 script = ExtResource("5_c6leb")
@@ -43,6 +47,10 @@ rotation = -1.5707964
 shape = SubResource("CircleShape2D_wnj1o")
 
 [node name="Hitbox" parent="." unique_id=713050216 instance=ExtResource("3_5dc8e")]
+collision_layer = 256
+
+[node name="CollisionShape2D" parent="Hitbox" index="0" unique_id=1827316461]
+shape = SubResource("CircleShape2D_ui20s")
 
 [node name="Hand" type="Marker2D" parent="." unique_id=763609668]
 position = Vector2(16, 0)
@@ -53,8 +61,13 @@ magazine = SubResource("Resource_ui20s")
 [node name="Health" parent="." unique_id=1038555171 node_paths=PackedStringArray("hitboxes") instance=ExtResource("6_c6leb")]
 hitboxes = [NodePath("../Hitbox")]
 heartless = true
+immune_time = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=481115355]
 position_smoothing_enabled = true
 
 [connection signal="died" from="Health" to="." method="_on_health_died"]
+[connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
+[connection signal="max_health_changed" from="Health" to="." method="_on_health_max_health_changed"]
+
+[editable path="Hitbox"]

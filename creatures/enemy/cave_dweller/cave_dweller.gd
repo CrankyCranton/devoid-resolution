@@ -1,7 +1,9 @@
 class_name CaveDweller extends Enemy
+# TODO: Add knockback from attacks.
 
 
 const DESIRED_SEARCH_POINT_DISTANCE: float = pow(32.0, 2.0)
+const ATTACK_RANGE: float = pow(64.0, 2.0)
 
 # Should probably rely on the blackboard more to store variables,
 # so that variables won't be everywhere.
@@ -11,6 +13,9 @@ const DESIRED_SEARCH_POINT_DISTANCE: float = pow(32.0, 2.0)
 var on_wall: bool:
 	get:
 		return is_on_wall()
+var is_within_range: bool:
+	get:
+		return global_position.distance_squared_to(player.global_position) <= ATTACK_RANGE
 
 
 func _physics_process(_delta: float) -> void:

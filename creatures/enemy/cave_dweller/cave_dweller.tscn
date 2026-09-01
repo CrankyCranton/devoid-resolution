@@ -4,12 +4,60 @@
 [ext_resource type="Script" uid="uid://b1s5a7803yos3" path="res://creatures/enemy/cave_dweller/cave_dweller.gd" id="2_845mc"]
 [ext_resource type="PackedScene" uid="uid://li5dweujrwo4" path="res://creatures/enemy/sight/sight.tscn" id="3_deku7"]
 [ext_resource type="BehaviorTree" uid="uid://d2l5oum5hdhbk" path="res://creatures/enemy/cave_dweller/cave_dweller.tres" id="4_845mc"]
+[ext_resource type="PackedScene" uid="uid://c3cn35lg7h0xn" path="res://combat/hurtbox/hurtbox.tscn" id="5_deku7"]
+[ext_resource type="Script" uid="uid://bhhwyht76kt60" path="res://combat/damage.gd" id="6_slnaq"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_qao1d"]
 binding/target = NodePath("..:player")
 binding/search_point = NodePath("..:search_point")
 
+[sub_resource type="Resource" id="Resource_deku7"]
+resource_local_to_scene = true
+script = ExtResource("6_slnaq")
+metadata/_custom_type_script = "uid://bhhwyht76kt60"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_324fl"]
+radius = 8.0
+
+[sub_resource type="Animation" id="Animation_slnaq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hurtbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_xsnkf"]
+resource_name = "attack"
+length = 0.39999999999999997
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hurtbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sdaj8"]
+_data = {
+&"RESET": SubResource("Animation_slnaq"),
+&"attack": SubResource("Animation_xsnkf")
+}
+
 [node name="CaveDweller" unique_id=1896433514 instance=ExtResource("1_845mc")]
+collision_mask = 5
 script = ExtResource("2_845mc")
 search_point = Vector2(inf, inf)
 
@@ -22,8 +70,20 @@ polygon = PackedVector2Array(-48, 0, -24, 40, 0, 128, 320, 256, 480, 0, 320, -25
 behavior_tree = ExtResource("4_845mc")
 blackboard_plan = SubResource("BlackboardPlan_qao1d")
 
+[node name="Hurtbox" parent="." index="7" unique_id=1070702956 instance=ExtResource("5_deku7")]
+collision_mask = 256
+damage = SubResource("Resource_deku7")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0" unique_id=864043080]
+shape = SubResource("CircleShape2D_324fl")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8" unique_id=143013695]
+libraries/ = SubResource("AnimationLibrary_sdaj8")
+
 [connection signal="collider_entered" from="Sight" to="." method="_on_sight_collider_entered"]
 [connection signal="collider_exited" from="Sight" to="." method="_on_sight_collider_exited"]
 [connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
 
 [editable path="Sight"]
+[editable path="Hurtbox"]
