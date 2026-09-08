@@ -2,13 +2,13 @@ class_name Player extends Kinematic
 
 
 const SPEED: float = 128.0
-const MAX_CORRUPTION: int = 100
 const MAX_HEALTH: int = 100
 # TODO: Make it depend on the player's current weight of inventory/weapon.
 const TURN_SPEED: float = 20.0
 
 @onready var health: Health = $Health
 
+var adernaline: int = 0
 var corruption: int = 0:
 	set(value):
 		corruption = value

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dc4ob1ecpbqo6" path="res://creatures/enemy/enemy.tscn" id="1_845mc"]
 [ext_resource type="Script" uid="uid://b1s5a7803yos3" path="res://creatures/enemy/cave_dweller/cave_dweller.gd" id="2_845mc"]
 [ext_resource type="PackedScene" uid="uid://li5dweujrwo4" path="res://creatures/enemy/sight/sight.tscn" id="3_deku7"]
-[ext_resource type="BehaviorTree" uid="uid://d2l5oum5hdhbk" path="res://creatures/enemy/cave_dweller/cave_dweller.tres" id="4_845mc"]
+[ext_resource type="BehaviorTree" uid="uid://ly2xrhh13oj2" path="res://creatures/enemy/cave_dweller/cave_dweller.tres" id="4_845mc"]
 [ext_resource type="PackedScene" uid="uid://c3cn35lg7h0xn" path="res://combat/hurtbox/hurtbox.tscn" id="5_deku7"]
 [ext_resource type="Script" uid="uid://bhhwyht76kt60" path="res://combat/damage.gd" id="6_slnaq"]
 
@@ -36,7 +36,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_xsnkf"]
 resource_name = "attack"
-length = 0.39999999999999997
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

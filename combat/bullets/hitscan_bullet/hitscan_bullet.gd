@@ -20,6 +20,7 @@ func _ready() -> void:
 	if is_colliding():
 		if get_collider() is Hitbox:
 			get_collider().take_damage(damage, instigator)
+			Bleed.new(get_collider().owner, instigator, 15) # TESTING
 			hurt.emit(get_collider())
 		add_fx(HIT_FX, Transform2D(0.0, (get_parent() as Node2D).to_local(get_collision_point())))
 	add_fx(SHOOT_FX, global_transform) # Find way to give the scene the length of the trajectory?

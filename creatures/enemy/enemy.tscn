@@ -22,12 +22,6 @@ metadata/_snap_enabled = true
 [sub_resource type="CircleShape2D" id="CircleShape2D_qcud2"]
 radius = 16.0
 
-[sub_resource type="Curve" id="Curve_fxr07"]
-_limits = [0.0, 10.0, 0.0, 50.0]
-_data = [Vector2(0, 5), 0.0, 0.0, 0, 0, Vector2(50, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-metadata/_snap_enabled = true
-
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_427j3"]
 
 [sub_resource type="BehaviorTree" id="BehaviorTree_427j3"]
@@ -54,13 +48,20 @@ collision_layer = 512
 
 [node name="Health" parent="." unique_id=1038555171 node_paths=PackedStringArray("hitboxes") instance=ExtResource("3_iuxou")]
 hitboxes = [NodePath("../Hitbox")]
-bleed_rate = SubResource("Curve_fxr07")
 
 [node name="BTPlayer" type="BTPlayer" parent="." unique_id=817829925]
 behavior_tree = SubResource("BehaviorTree_427j3")
 blackboard_plan = SubResource("BlackboardPlan_iuxou")
 
-[node name="EnemyHealthBar" parent="." unique_id=76447671 instance=ExtResource("4_427j3")]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="." unique_id=670171953]
+remote_path = NodePath("../Marker2D")
+update_rotation = false
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1096161780]
+top_level = true
+
+[node name="EnemyHealthBar" parent="Marker2D" unique_id=76447671 instance=ExtResource("4_427j3")]
+unique_name_in_owner = true
 offset_top = -22.0
 offset_bottom = -19.0
 karma = 0

@@ -1,5 +1,10 @@
 class_name Damage extends Resource
 # Add ignoring logic here?
+# Should Damage have an automatic system to pass conditions with it?
+# I'm leaning towards yes because it seems convenient. Although that would mean that health.gd
+# would need access to it's owner to apply the conditions, which would
+# technically reduce modularity. (although I can't think of many cases where
+# health wouldn't be tied to one owner. Except for switches/triggers for puzzles)
 
 
 enum Type {

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d27yvcuyrcrvh"]
 
 [ext_resource type="PackedScene" uid="uid://durfwpyqokqek" path="res://inventory/items/wieldable/guns/gun.tscn" id="1_bvcim"]
-[ext_resource type="PackedScene" uid="uid://dx4m6q82ukwxe" path="res://combat/bullets/hitscan_bullet/test_bullet.tscn" id="2_g8nqh"]
+[ext_resource type="PackedScene" uid="uid://cbcxc56yqi1lc" path="res://combat/bullets/hitscan_bullet/test_bullet.tscn" id="2_g8nqh"]
 [ext_resource type="Script" uid="uid://vresenge4ppd" path="res://inventory/items/wieldable/guns/magazine.gd" id="2_upbpa"]
 
 [sub_resource type="Resource" id="Resource_g8nqh"]
@@ -25,7 +25,6 @@ metadata/_snap_enabled = true
 [node name="TestGun" unique_id=1367513799 instance=ExtResource("1_bvcim")]
 BULLET = ExtResource("2_g8nqh")
 magazine = SubResource("Resource_g8nqh")
-automatic = true
 
 [node name="Cooldown" parent="." index="1" unique_id=178919166]
 wait_time = 0.1

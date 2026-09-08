@@ -8,7 +8,7 @@ var dead := false
 
 @onready var health: Health = $Health
 @onready var bt_player: BTPlayer = $BTPlayer
-@onready var enemy_health_bar: EnemyHealthBar = $EnemyHealthBar
+@onready var enemy_health_bar: EnemyHealthBar = %EnemyHealthBar
 
 
 func _on_health_health_changed(health: int) -> void:

@@ -44,14 +44,14 @@ enabled=PackedStringArray("res://addons/rmsmartshape/plugin.cfg", "res://addons/
 
 folder_colors={
 "res://ai/": "gray",
-"res://assets/": "purple",
-"res://combat/": "blue",
-"res://creatures/": "teal",
-"res://hud/": "green",
-"res://interactable/": "yellow",
-"res://inventory/": "orange",
-"res://levels/": "red",
-"res://vfx/": "pink"
+"res://assets/": "blue",
+"res://combat/": "teal",
+"res://creatures/": "green",
+"res://hud/": "yellow",
+"res://interactable/": "orange",
+"res://inventory/": "red",
+"res://levels/": "pink",
+"res://vfx/": "purple"
 }
 
 [gui]

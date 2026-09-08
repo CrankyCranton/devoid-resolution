@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dx4m6q82ukwxe"]
+[gd_scene format=3 uid="uid://cbcxc56yqi1lc"]
 
 [ext_resource type="PackedScene" uid="uid://dad0ecmal6ck4" path="res://combat/bullets/hitscan_bullet/hitscan_bullet.tscn" id="1_ic0j8"]
 [ext_resource type="Script" uid="uid://bhhwyht76kt60" path="res://combat/damage.gd" id="2_o8te7"]

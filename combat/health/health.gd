@@ -1,6 +1,7 @@
 class_name Health extends Node
 # Extend from Resource? Might make ref counting more complicated,
 # and connecting signals via GUI less convenient.
+# Rule of thumb: Use nodes for things that do, and resources for things that store.
 
 
 signal died(karma: int)
@@ -20,38 +21,22 @@ signal max_health_changed(max_health: int)
 	set(value):
 		health = mini(value, max_health)
 		health_changed.emit(health)
-@export var heartless := false
-## y is damage/secodns, x is at HP.
-# Might want to seperate into a condition to make it applicable regardless of current health.
-# In that case, there should also be a system to auto-stop bleeding over time,
-# like in Shattered Pixel Dungeon.
-# Thick blood can be represented through bleed damage resistance.
-# Perhaps it can connected to temperature?
-#func _process():
-#	health -= bleed
-#	bleed -= congelation
-#	if bandage:
-#		# Bandages should be able to completely patch up bleed damage for the most part.
-#		bleed -= bandage
-# TODO: Once bleed damage is converted to a condition, add the bleed damage to corruption.
-@export var bleed_rate: Curve
+@export var soul: float = 1.0
+# Should congelation be applied here or in bleed.gd? (currently bleed.gd)
+@export var congelation: int = 5
+# If warmth also affects stamina, and stamina affects movement,
+# should warmth be made it's own module? If it's put into it's own script,
+# will health still need some porting variables to it?
+@export var base_warmth: int = 98
+@export var base_insulation: float = 1.0
 @export var immune_time: float = 0.0
 @export var vulnerabilities: Dictionary[Damage.Type, float]
+@export var armour: Array[PackedScene] # Not stored on health, but given to health.
 
 var immune_timer := Timer.new()
 var immune := false
-var time_since_bled: float = 0.0
-# TODO: Apply corruption to friendlies as well (any creature that's not the player or a boss).
-# Instead of exclusively bosses and the player,
-# maybe it doesn't apply to any creature with a "heartless" trait.
-# Perhaps heart is a float multiplier. Call "warmth", "soul", or "sentience"?
-# Change corruption to infamy/adrenaline, remove the instant death if corruption goes too high,
-# and instead permanently reduce max health, and increase enemy agression/spawn rate
-# on the level tied to the infamy?
 var karma: int = 0:
 	set(value):
-		if heartless:
-			return
 		karma = value
 		karma_changed.emit(karma)
 var already_released_karma := false
@@ -63,21 +48,6 @@ func _ready() -> void:
 		_init_immune_timer()
 	for hitbox: Hitbox in hitboxes:
 		hitbox.hit.connect(_on_hitbox_hit)
-
-
-func _process(delta: float) -> void:
-	var is_bleeding: bool = bleed_rate != null and health <= bleed_rate.max_domain and health > 0
-	if is_bleeding:
-		time_since_bled += delta
-		var time_until_next_bleed: float = 1.0 / bleed_rate.sample(health)
-		while time_since_bled >= time_until_next_bleed:
-			time_since_bled -= time_until_next_bleed
-			# If the player hits a creature, it's always the player's fault if the creature bleeds.
-			take_damage(Damage.new(Damage.Type.BLEED, 1, 1, 0.0, 1.0, 3), player)
-			# Put into function? "do while" could be useful here.
-			time_until_next_bleed = 1.0 / bleed_rate.sample(health)
-	else:
-		time_since_bled = 0.0
 
 
 func _init_immune_timer() -> void:
@@ -92,10 +62,6 @@ func heal(healing: int) -> void:
 	healed.emit(healing)
 
 
-# Add support for residual damage? Maybe that would be better as a condition than damage type.
-# Condition: Any temporary effect on a character.
-# TODO: Multiply health by how much a bullet hit to the center.
-# Probs more of a bullet script thing than health component thing.
 func take_damage(damage: Damage, instigator: Node = null) -> void:
 	var previous_released_karma: int = karma
 	var damage_num: int = damage.get_damage()
@@ -104,12 +70,12 @@ func take_damage(damage: Damage, instigator: Node = null) -> void:
 	var excess: int = damage_num - maxi(0, health)
 	health -= damage_num
 	if instigator is Player:
-		karma += damage.pain
+		karma += floori(damage.pain * soul)
 	hurt.emit(damage_num)
 
 	if health <= 0:
 		if instigator is Player:
-			karma += excess
+			karma += floori(excess * soul)
 		if player != null:
 			var adding_karma: int = karma
 			if already_released_karma:
