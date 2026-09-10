@@ -8,7 +8,10 @@ const TURN_SPEED: float = 20.0
 
 @onready var health: Health = $Health
 
-var adernaline: int = 0
+var adrenaline: int = 0:
+	set(value):
+		adrenaline = value
+		HUD.set_adrenaline(value)
 var corruption: int = 0:
 	set(value):
 		corruption = value
@@ -16,6 +19,8 @@ var corruption: int = 0:
 
 
 func _ready() -> void:
+	var adrenaline_ticker := Ticker.new(func() -> float: return 0.5, _on_adrenaline_ticker_ticked)
+	add_child(adrenaline_ticker)
 	HUD.set_max_health(health.max_health)
 	HUD.set_health(health.health)
 
@@ -35,6 +40,13 @@ func _input(event: InputEvent) -> void:
 		$Hand/TestGun.release_trigger()
 
 
+func add_adrenaline() -> void:
+	# Should the adrenaline bonus be stored on the health/creature script?
+	# Maybe it's determined by a random percentage of the creature's max HP?
+	# Then I should think about the HP ratios of enemies to each other.
+	adrenaline += randi_range(5, 10)
+
+
 func _on_health_died(_krama: int) -> void:
 	get_tree().paused = true
 
@@ -45,3 +57,7 @@ func _on_health_health_changed(health: int) -> void:
 
 func _on_health_max_health_changed(max_health: int) -> void:
 	HUD.set_max_health(max_health)
+
+
+func _on_adrenaline_ticker_ticked() -> void:
+	adrenaline = maxi(0, adrenaline - 1)

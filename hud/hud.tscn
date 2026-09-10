@@ -142,11 +142,13 @@ offset_bottom = -2.0
 grow_vertical = 0
 
 [node name="AdrenalineHUD" type="Label" parent="ControlRoot/VBoxContainer" unique_id=1614267902]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Adrenaline: 24%"
 label_settings = SubResource("LabelSettings_324fl")
 
 [node name="WarmthHUD" type="Label" parent="ControlRoot/VBoxContainer" unique_id=1899955239]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Body temperature: 99°"
 label_settings = SubResource("LabelSettings_324fl")
@@ -196,5 +198,17 @@ offset_bottom = -92.0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 8
 text = "="
+
+[node name="Label" type="Label" parent="ControlRoot" unique_id=1488463867]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 0
+offset_left = -163.0
+offset_top = 93.0
+offset_right = -19.0
+offset_bottom = 306.0
+text = "NOTE:
+The elements in the corner might exclusively be for the player,
+so they might should be moved to the playerscene in the future."
+autowrap_mode = 3
 
 [connection signal="child_exiting_tree" from="ControlRoot/MenuDim/Menus" to="." method="_on_menus_child_exiting_tree"]

@@ -5,6 +5,8 @@ extends CanvasLayer
 @onready var menu_dim: ColorRect = %MenuDim
 @onready var menus: HFlowContainer = %Menus
 @onready var health_bar: TextureProgressBar = %HealthBar
+@onready var adrenaline_hud: Label = %AdrenalineHUD
+@onready var warmth_hud: Label = %WarmthHUD
 
 
 #func _ready() -> void:
@@ -21,6 +23,10 @@ func set_health(health: int) -> void:
 
 func set_max_health(max_health: int) -> void:
 	health_bar.max_value = max_health
+
+
+func set_adrenaline(adrenaline: int) -> void:
+	adrenaline_hud.text = "Adrenaline: " + str(adrenaline) + "%"
 
 
 func open_inventory(inventory: Inventory, title := "Items") -> void:

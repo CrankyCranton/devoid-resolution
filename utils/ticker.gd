@@ -5,7 +5,8 @@ class_name Ticker extends Node
 
 signal ticked
 
-var tick: Callable = func() -> float: return 1.0 # TODO: Add @export NodePath for convenience.
+# TODO: Add @export NodePath for convenience.
+var tick: Callable = func(return_num: float = 1.0) -> float: return return_num
 var time_since_tick: float = 0.0
 
 

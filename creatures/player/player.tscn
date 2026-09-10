@@ -27,11 +27,11 @@ radius = 16.0
 resource_local_to_scene = true
 radius = 8.0
 
-[sub_resource type="Resource" id="Resource_ui20s"]
+[sub_resource type="Resource" id="Resource_2fd13"]
 resource_local_to_scene = true
 script = ExtResource("5_c6leb")
-max_ammo = 100
-ammo = 100
+max_ammo = 1000
+ammo = 1000
 
 [node name="Player" type="CharacterBody2D" unique_id=130575947]
 collision_layer = 2
@@ -56,11 +56,10 @@ shape = SubResource("CircleShape2D_ui20s")
 position = Vector2(16, 0)
 
 [node name="TestGun" parent="Hand" unique_id=1367513799 instance=ExtResource("4_ixbpm")]
-magazine = SubResource("Resource_ui20s")
+magazine = SubResource("Resource_2fd13")
 
 [node name="Health" parent="." unique_id=1038555171 node_paths=PackedStringArray("hitboxes") instance=ExtResource("6_c6leb")]
 hitboxes = [NodePath("../Hitbox")]
-heartless = true
 immune_time = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=481115355]

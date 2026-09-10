@@ -41,6 +41,7 @@ var karma: int = 0:
 		karma_changed.emit(karma)
 var already_released_karma := false
 var player: Player = null # Recorded if the player hit the enemy. NOTE: The player can hit himself.
+var dead := false
 
 
 func _ready() -> void:
@@ -82,7 +83,11 @@ func take_damage(damage: Damage, instigator: Node = null) -> void:
 				adding_karma -= previous_released_karma
 			player.corruption += adding_karma
 			already_released_karma = true
-		died.emit(karma)
+			if not dead:
+				player.add_adrenaline()
+		if not dead:
+			dead = true
+			died.emit(karma)
 
 
 func _on_hitbox_hit(damage: Damage, instigator: Node) -> void:
