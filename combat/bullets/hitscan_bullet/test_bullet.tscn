@@ -5,6 +5,8 @@
 
 [sub_resource type="Resource" id="Resource_ajbks"]
 script = ExtResource("2_o8te7")
+minimum = 30
+maximum = 40
 metadata/_custom_type_script = "uid://bhhwyht76kt60"
 
 [node name="HitscanBullet" unique_id=709916053 instance=ExtResource("1_ic0j8")]

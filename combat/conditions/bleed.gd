@@ -1,6 +1,9 @@
 class_name Bleed extends Condition
 # Do conditions stack or merge? If stacked, it would be intuitive if
 # bandages removed 1 bleed condition.
+# TODO: Remove bleed condition after death, as well as all other conditions.
+# Should probably be done within the player/enemy script. But that means they share inheritance?
+# So instead of putting it in their scripts, it should probably be put in the modular death leaflet.
 
 
 const BASE_TIME: float = 10.0

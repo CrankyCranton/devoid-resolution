@@ -1,10 +1,10 @@
 extends CanvasLayer
 
 
-@onready var corruption_bar: ProgressBar = %CorruptionBar
-@onready var menu_dim: ColorRect = $MenuDim
+@onready var corruption_bar: TextureProgressBar = %CorruptionBar
+@onready var menu_dim: ColorRect = %MenuDim
 @onready var menus: HFlowContainer = %Menus
-@onready var health_bar: TextureProgressBar = $HealthBar
+@onready var health_bar: TextureProgressBar = %HealthBar
 
 
 #func _ready() -> void:

@@ -2,14 +2,25 @@
 
 [ext_resource type="Script" uid="uid://bcqo441k50fq7" path="res://hud/hud.gd" id="1_6ca3a"]
 [ext_resource type="PackedScene" uid="uid://d1n0a6to48d4x" path="res://hud/inventory_display/hotbar/hotbar.tscn" id="2_2gk58"]
-[ext_resource type="PackedScene" uid="uid://dipfyhh8m6f18" path="res://hud/inventory_display/inventory_display_slot/inventory_display_slot.tscn" id="4_w8tcp"]
-[ext_resource type="Resource" uid="uid://by7c486khf84a" path="res://inventory/hands_inv.tres" id="5_svhta"]
+
+[sub_resource type="Gradient" id="Gradient_w8tcp"]
+offsets = PackedFloat32Array(0, 0.9939759)
+colors = PackedColorArray(0, 0.055999983, 0.08, 0.5019608, 0.24447997, 0.24319999, 0.32, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_324fl"]
+gradient = SubResource("Gradient_w8tcp")
+width = 245
+height = 256
+fill = 1
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0.43760684, 0.5769231)
 
 [sub_resource type="Gradient" id="Gradient_2gk58"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.5, 0.6)
-colors = PackedColorArray(0.45, 0.45, 0.45, 1, 0.36, 0.36, 0.36, 1, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.5, 0.6, 0.7, 0.8, 0.95, 1)
+colors = PackedColorArray(0.45, 0.45, 0.45, 1, 0.36, 0.36, 0.36, 1, 1, 1, 1, 0, 0.36078432, 0.36078432, 0.36078432, 1, 0.4509804, 0.4509804, 0.4509804, 1, 0.55, 0.55, 0.55, 1, 0.36, 0.36, 0.36, 0)
 metadata/_snap_enabled = true
+metadata/_snap_count = 20
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_qcud2"]
 gradient = SubResource("Gradient_2gk58")
@@ -20,9 +31,10 @@ metadata/_snap_enabled = true
 
 [sub_resource type="Gradient" id="Gradient_318vg"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.7, 0.8, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0.8, 0.16, 0.28800017, 1, 0.89459085, 0.22961372, 0.22961372, 1, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.7, 0.8, 0.9, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.8, 0.16, 0.28800017, 1, 0.89459085, 0.22961372, 0.22961372, 1, 0.89459085, 0.22961372, 0.22961372, 1, 1, 1, 1, 0)
 metadata/_snap_enabled = true
+metadata/_snap_count = 20
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_7ec35"]
 gradient = SubResource("Gradient_318vg")
@@ -33,33 +45,34 @@ metadata/_snap_enabled = true
 
 [sub_resource type="Gradient" id="Gradient_svhta"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.5, 0.6)
-colors = PackedColorArray(0.39, 0.39, 0.39, 1, 0.36, 0.36, 0.36, 1, 1, 1, 1, 0)
-metadata/_snap_enabled = true
+colors = PackedColorArray(0.06567105, 0.0035398188, 0.17775075, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_318vg"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kce6f"]
 gradient = SubResource("Gradient_svhta")
-width = 48
-height = 48
+width = 34
+height = 34
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 metadata/_snap_enabled = true
 
-[sub_resource type="Gradient" id="Gradient_w8tcp"]
+[sub_resource type="Gradient" id="Gradient_fjv1a"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.7, 0.8, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0.28906643, 0.12599999, 0.63, 1, 0.37837648, 0.195, 0.75, 1, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.9, 1)
+colors = PackedColorArray(0.38620943, 0.16822365, 0.4408114, 1, 0.32452598, 0.12002186, 0.43423486, 1, 1, 1, 1, 0)
 metadata/_snap_enabled = true
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_w8tcp"]
-gradient = SubResource("Gradient_w8tcp")
-width = 48
-height = 48
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0ivg5"]
+gradient = SubResource("Gradient_fjv1a")
+width = 34
+height = 34
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 metadata/_snap_enabled = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_324fl"]
+font_size = 12
 
 [node name="HUD" type="CanvasLayer" unique_id=955463685]
 script = ExtResource("1_6ca3a")
@@ -73,23 +86,75 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CorruptionBar" type="ProgressBar" parent="ControlRoot" unique_id=813136934]
+[node name="Polygon2D" type="Polygon2D" parent="ControlRoot" unique_id=538749966]
+texture = SubResource("GradientTexture2D_324fl")
+polygon = PackedVector2Array(0, 144, 16, 144, 80, 168, 88, 176, 104, 192, 120, 208, 144, 224, 160, 240, 200, 248, 208, 248, 224, 256, 232, 272, 0, 272)
+uv = PackedVector2Array(13.660273, 44.031647, 29.660273, 44.031647, 93.66028, 68.03165, 101.66028, 76.03165, 117.66028, 92.03165, 133.66028, 108.03165, 157.66028, 124.03165, 173.66026, 140.03165, 213.66026, 148.03165, 229.66026, 156.03165, 237.66026, 172.03165, 13.660273, 172.03165)
+
+[node name="HealthBar" type="TextureProgressBar" parent="ControlRoot" unique_id=343906078]
 unique_name_in_owner = true
-editor_description = "Might remove if corruption isn't instant death."
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 432.0
-offset_top = -166.0
-offset_right = 452.0
-offset_bottom = -60.0
+offset_left = 8.0
+offset_top = -98.0
+offset_right = 72.0
+offset_bottom = -34.0
 grow_vertical = 0
-max_value = 1000.0
-fill_mode = 3
+value = 70.0
+fill_mode = 4
+texture_under = SubResource("GradientTexture2D_qcud2")
+texture_progress = SubResource("GradientTexture2D_7ec35")
 
-[node name="MenuDim" type="ColorRect" parent="." unique_id=482467086]
+[node name="CorruptionBar" type="TextureProgressBar" parent="ControlRoot/HealthBar" unique_id=1252185328]
+unique_name_in_owner = true
+editor_description = "Might remove if corruption isn't instant death."
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 2000.0
+value = 32.0
+fill_mode = 3
+texture_under = SubResource("GradientTexture2D_kce6f")
+texture_progress = SubResource("GradientTexture2D_0ivg5")
+
+[node name="Hotbar" parent="ControlRoot" unique_id=1597752203 instance=ExtResource("2_2gk58")]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ControlRoot" unique_id=155155631]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -30.0
+offset_right = 156.0
+offset_bottom = -2.0
+grow_vertical = 0
+
+[node name="AdrenalineHUD" type="Label" parent="ControlRoot/VBoxContainer" unique_id=1614267902]
+layout_mode = 2
+text = "Adrenaline: 24%"
+label_settings = SubResource("LabelSettings_324fl")
+
+[node name="WarmthHUD" type="Label" parent="ControlRoot/VBoxContainer" unique_id=1899955239]
+layout_mode = 2
+text = "Body temperature: 99°"
+label_settings = SubResource("LabelSettings_324fl")
+
+[node name="MenuDim" type="ColorRect" parent="ControlRoot" unique_id=482467086]
+unique_name_in_owner = true
 visible = false
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -97,7 +162,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.5019608)
 
-[node name="Menus" type="HFlowContainer" parent="MenuDim" unique_id=1764517179]
+[node name="Menus" type="HFlowContainer" parent="ControlRoot/MenuDim" unique_id=1764517179]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 14
@@ -108,64 +173,28 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Hotbar" parent="." unique_id=1597752203 instance=ExtResource("2_2gk58")]
-
-[node name="HealthBar" type="TextureProgressBar" parent="." unique_id=343906078]
+[node name="Armour" type="Button" parent="ControlRoot" unique_id=839125095]
+layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = -94.0
-offset_right = 72.0
-offset_bottom = -30.0
+offset_left = 75.0
+offset_top = -58.0
+offset_right = 104.0
+offset_bottom = -33.0
 grow_vertical = 0
-value = 100.0
-fill_mode = 4
-texture_under = SubResource("GradientTexture2D_qcud2")
-texture_progress = SubResource("GradientTexture2D_7ec35")
 
-[node name="SlotHandL" parent="HealthBar" unique_id=1472236627 instance=ExtResource("4_w8tcp")]
+[node name="StatisticsTable" type="Button" parent="ControlRoot" unique_id=1287801904]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -12.0
-offset_top = -12.0
-offset_right = 12.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-inventory = ExtResource("5_svhta")
-
-[node name="TextureProgressBar2" type="TextureProgressBar" parent="." unique_id=523527009]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 64.0
-offset_top = -54.0
-offset_right = 112.0
-offset_bottom = -6.0
+offset_left = 2.0
+offset_top = -108.0
+offset_right = 15.0
+offset_bottom = -92.0
 grow_vertical = 0
-value = 100.0
-fill_mode = 4
-texture_under = SubResource("GradientTexture2D_318vg")
-texture_progress = SubResource("GradientTexture2D_w8tcp")
+theme_override_font_sizes/font_size = 8
+text = "="
 
-[node name="SlotHandR" parent="TextureProgressBar2" unique_id=1507525500 instance=ExtResource("4_w8tcp")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -12.0
-offset_top = -12.0
-offset_right = 12.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-inventory = ExtResource("5_svhta")
-
-[connection signal="child_exiting_tree" from="MenuDim/Menus" to="." method="_on_menus_child_exiting_tree"]
+[connection signal="child_exiting_tree" from="ControlRoot/MenuDim/Menus" to="." method="_on_menus_child_exiting_tree"]
