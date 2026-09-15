@@ -1,7 +1,25 @@
 [gd_scene format=3 uid="uid://hf8uovgvp6bv"]
 
 [ext_resource type="Script" uid="uid://bwxte6hjo886f" path="res://hud/inventory_display/inventory_display.gd" id="1_i8x1k"]
-[ext_resource type="Resource" uid="uid://c4kc4u6tb3acj" path="res://inventory/test_inv.tres" id="2_7vh03"]
+[ext_resource type="Script" uid="uid://cgljwurtxiqme" path="res://inventory/items/abstract_item/abstract_item.gd" id="2_navut"]
+[ext_resource type="Script" uid="uid://t64picqgbn4k" path="res://inventory/inventory.gd" id="3_0gla3"]
+[ext_resource type="PackedScene" uid="uid://d27yvcuyrcrvh" path="res://inventory/items/wieldable/guns/test_gun.tscn" id="3_brirr"]
+[ext_resource type="Texture2D" uid="uid://c2tu3lxqxnbs" path="res://assets/placeholder_icon_2.tres" id="4_mxink"]
+
+[sub_resource type="Resource" id="Resource_324fl"]
+script = ExtResource("2_navut")
+SCENE = ExtResource("3_brirr")
+icon = ExtResource("4_mxink")
+count = 10
+metadata/_custom_type_script = "uid://cgljwurtxiqme"
+
+[sub_resource type="Resource" id="Resource_c1psu"]
+script = ExtResource("3_0gla3")
+items = Dictionary[int, ExtResource("2_navut")]({
+0: SubResource("Resource_324fl"),
+3: SubResource("Resource_324fl")
+})
+metadata/_custom_type_script = "uid://t64picqgbn4k"
 
 [node name="InventoryDisplay" type="PanelContainer" unique_id=503631675]
 custom_minimum_size = Vector2(96, 64)
@@ -13,13 +31,13 @@ anchor_bottom = 0.5
 offset_left = -110.0
 offset_top = -63.0
 offset_right = 110.0
-offset_bottom = 63.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_i8x1k")
-inventory = ExtResource("2_7vh03")
+inventory = SubResource("Resource_c1psu")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2120460434]
 layout_mode = 2
@@ -44,7 +62,15 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "X"
 
-[node name="Slots" type="Control" parent="VBoxContainer" unique_id=1677102306]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1973245977]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Slots" type="Control" parent="VBoxContainer/MarginContainer" unique_id=1677102306]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3

@@ -1,6 +1,6 @@
-class_name SlotArranger extends Object
+class_name SlotArranger extends RefCounted
 # When I want to make a script to extend another script's functionality,
-# I wonder if extending from Object is good.
+# I wonder if extending from RefCounted/Object is good.
 
 
 # In this case, the signal isn't a reaction, but a trigger. Hence the present-tense.
@@ -35,12 +35,12 @@ func arrange(ignore_nodes: Array[Node] = []) -> void:
 
 func _on_owner_ready() -> void:
 	for i: int in (inventory as Inventory).max_slots:
-		var slot: InventoryDisplaySlot = preload("uid://dipfyhh8m6f18").instantiate()
+		var slot: DisplaySlot = preload("uid://dipfyhh8m6f18").instantiate()
 		slot.inventory = inventory
 		slot.index = i
 		owner.add_child(slot)
 		if inventory.items.has(i):
-			slot.create_item.callv(inventory.items[i])
+			slot.create_item(inventory.items[i])
 
 
 func _on_owner_child_entered_tree(_node: Node) -> void:

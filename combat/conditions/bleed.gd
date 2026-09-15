@@ -39,7 +39,8 @@ func congeal_tick() -> float:
 
 
 func _on_bleed_ticker_ticked() -> void:
-	target.health.take_damage(Damage.new(Damage.Type.BLEED, 1, 1, 0.0, 1.0, 3), instigator)
+	const PAIN: int = 5
+	target.health.take_damage(Damage.new(Damage.Type.BLEED, 1, 1, 0.0, 1.0, PAIN), instigator)
 
 
 func _on_congeal_ticker_ticked() -> void:

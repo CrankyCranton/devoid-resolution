@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="Inventory" format=3 uid="uid://by7c486khf84a"]
-
-[ext_resource type="Script" uid="uid://t64picqgbn4k" path="res://inventory/inventory.gd" id="1_33goq"]
-
-[resource]
-script = ExtResource("1_33goq")
-max_slots = 2
-metadata/_custom_type_script = "uid://t64picqgbn4k"
