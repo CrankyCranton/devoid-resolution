@@ -1,0 +1,178 @@
+[gd_scene format=3 uid="uid://cyyakjuarttdt"]
+
+[ext_resource type="PackedScene" uid="uid://d1n0a6to48d4x" path="res://hud/inventory_display/hotbar/hotbar.tscn" id="1_atf32"]
+[ext_resource type="Script" uid="uid://m68xy2ft22yl" path="res://hud/player_hud/player_hud.gd" id="1_ec28j"]
+
+[sub_resource type="Gradient" id="Gradient_w8tcp"]
+offsets = PackedFloat32Array(0, 0.9939759)
+colors = PackedColorArray(0, 0.055999983, 0.08, 0.5019608, 0.24447997, 0.24319999, 0.32, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ec28j"]
+gradient = SubResource("Gradient_w8tcp")
+width = 245
+height = 256
+fill = 1
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0.43760684, 0.5769231)
+
+[sub_resource type="Gradient" id="Gradient_2gk58"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5, 0.6, 0.7, 0.8, 0.95, 1)
+colors = PackedColorArray(0.45, 0.45, 0.45, 1, 0.36, 0.36, 0.36, 1, 1, 1, 1, 0, 0.36078432, 0.36078432, 0.36078432, 1, 0.4509804, 0.4509804, 0.4509804, 1, 0.55, 0.55, 0.55, 1, 0.36, 0.36, 0.36, 0)
+metadata/_snap_enabled = true
+metadata/_snap_count = 20
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gxvn8"]
+gradient = SubResource("Gradient_2gk58")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_318vg"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.7, 0.8, 0.9, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.8, 0.16, 0.28800017, 1, 0.89459085, 0.22961372, 0.22961372, 1, 0.89459085, 0.22961372, 0.22961372, 1, 1, 1, 1, 0)
+metadata/_snap_enabled = true
+metadata/_snap_count = 20
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j7vwq"]
+gradient = SubResource("Gradient_318vg")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_svhta"]
+interpolation_mode = 1
+colors = PackedColorArray(0.06567105, 0.0035398188, 0.17775075, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mhlsh"]
+gradient = SubResource("Gradient_svhta")
+width = 34
+height = 34
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_fjv1a"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.9, 1)
+colors = PackedColorArray(0.38620943, 0.16822365, 0.4408114, 1, 0.32452598, 0.12002186, 0.43423486, 1, 1, 1, 1, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j2yfy"]
+gradient = SubResource("Gradient_fjv1a")
+width = 34
+height = 34
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_cubfj"]
+font_size = 12
+
+[node name="PlayerHUD" type="CanvasLayer" unique_id=1096845982]
+script = ExtResource("1_ec28j")
+
+[node name="ControlRoot" type="Control" parent="." unique_id=2021748387]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ControlRoot" unique_id=1141075026]
+texture = SubResource("GradientTexture2D_ec28j")
+polygon = PackedVector2Array(0, 144, 16, 144, 80, 168, 88, 176, 104, 192, 120, 208, 144, 224, 160, 240, 200, 248, 208, 248, 224, 256, 232, 272, 0, 272)
+uv = PackedVector2Array(13.660273, 44.031647, 29.660273, 44.031647, 93.66028, 68.03165, 101.66028, 76.03165, 117.66028, 92.03165, 133.66028, 108.03165, 157.66028, 124.03165, 173.66026, 140.03165, 213.66026, 148.03165, 229.66026, 156.03165, 237.66026, 172.03165, 13.660273, 172.03165)
+
+[node name="HealthBar" type="TextureProgressBar" parent="ControlRoot" unique_id=1193824640]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -98.0
+offset_right = 72.0
+offset_bottom = -34.0
+grow_vertical = 0
+value = 70.0
+fill_mode = 4
+texture_under = SubResource("GradientTexture2D_gxvn8")
+texture_progress = SubResource("GradientTexture2D_j7vwq")
+
+[node name="CorruptionBar" type="TextureProgressBar" parent="ControlRoot/HealthBar" unique_id=1824258291]
+unique_name_in_owner = true
+editor_description = "Might remove if corruption isn't instant death."
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 20000.0
+value = 32.0
+fill_mode = 3
+texture_under = SubResource("GradientTexture2D_mhlsh")
+texture_progress = SubResource("GradientTexture2D_j2yfy")
+
+[node name="Hotbar" parent="ControlRoot" unique_id=1597752203 instance=ExtResource("1_atf32")]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ControlRoot" unique_id=1715209165]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -30.0
+offset_right = 156.0
+offset_bottom = -2.0
+grow_vertical = 0
+
+[node name="AdrenalineHUD" type="Label" parent="ControlRoot/VBoxContainer" unique_id=1639035341]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Adrenaline: 24%"
+label_settings = SubResource("LabelSettings_cubfj")
+
+[node name="WarmthHUD" type="Label" parent="ControlRoot/VBoxContainer" unique_id=1195750553]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Body temperature: 99°"
+label_settings = SubResource("LabelSettings_cubfj")
+
+[node name="Armour" type="Button" parent="ControlRoot" unique_id=136104842]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = -58.0
+offset_right = 104.0
+offset_bottom = -33.0
+grow_vertical = 0
+
+[node name="StatisticsTable" type="Button" parent="ControlRoot" unique_id=1972851435]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -108.0
+offset_right = 15.0
+offset_bottom = -92.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 8
+text = "="

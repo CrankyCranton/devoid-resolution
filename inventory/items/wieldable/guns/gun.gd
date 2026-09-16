@@ -19,16 +19,14 @@ var reload_mag: Magazine:
 @onready var cooldown: Timer = $Cooldown
 @onready var reload_timer: Timer = $ReloadTimer
 
-@onready var instigator: Node = owner
 
-
-func pull_trigger() -> void:
+func start() -> void:
 	holding_trigger = true
 	if not (reloading or cooling):
 		_shoot()
 
 
-func release_trigger() -> void:
+func stop() -> void:
 	holding_trigger = false
 
 
@@ -54,7 +52,7 @@ func _shoot() -> void:
 		if bullet.has_signal(&"hurt"):
 			bullet.hurt.connect(hurt.emit)
 		# WARNING: Might be hard to debug, but should work at least.
-		bullet.set(&"instigator", instigator)
+		bullet.set(&"instigator", owner)
 		bullet.global_transform = barrel.global_transform
 		get_tree().current_scene.add_child(bullet)
 		cooldown.start()

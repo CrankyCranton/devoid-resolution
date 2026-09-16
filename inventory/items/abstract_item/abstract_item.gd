@@ -5,6 +5,9 @@
 
 signal count_changed(count: int)
 
+# Should try to avoid using this if possible, in favour of a more elegant local-scoped system.
+static var scene_to_item_lookup: Dictionary[PackedScene, AbstractItem]
+
 @export var SCENE: PackedScene
 @export var icon: Texture2D
 @export var max_stack_size: int = -1
@@ -16,3 +19,8 @@ signal count_changed(count: int)
 		else:
 			count = value
 		count_changed.emit(count)
+
+
+func _init() -> void:
+	if not scene_to_item_lookup.has(SCENE):
+		scene_to_item_lookup[SCENE] = self

@@ -9,3 +9,11 @@ class_name Wieldable extends Node2D
 #func _process(delta: float) -> void:
 	#rotation = lerp_angle(rotation, target_angle, minf(turn_speed * delta, 1.0))
 	#transform.y = Vector2.DOWN if global_transform.x.x > 0.0 else Vector2.UP
+
+
+func start() -> void:
+	pass
+
+
+func stop() -> void:
+	pass

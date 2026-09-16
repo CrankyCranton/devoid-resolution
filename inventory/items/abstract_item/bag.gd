@@ -1,4 +1,4 @@
-class_name Bag extends AbstractItem
+@tool class_name Bag extends AbstractItem
 # The spawned wieldable will need access to sub_inventory somehow.
 # In general, I think wieldable should have access to the AbstractItem it was derrived from,
 # in case the item has an auto-destruct feature, or something of the like.
