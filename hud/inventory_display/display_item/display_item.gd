@@ -1,4 +1,4 @@
-class_name DisplayItem extends TextureButton
+class_name DisplayItem extends TextureRect
 
 
 signal clicked
@@ -13,7 +13,7 @@ var count: int:
 var item: AbstractItem:
 	set(value):
 		item = value
-		texture_normal = item.icon
+		texture = item.icon
 		if item.max_stack_size != 1:
 			count = item.count
 			item.count_changed.connect(func(count: int) -> void: self.count = count)
@@ -29,31 +29,37 @@ func _process(_delta: float) -> void:
 		is_valid_click = false
 
 
-func _on_button_down() -> void:
-	drag_start = get_global_mouse_position() - offset_transform_position
+func _on_gui_input(event: InputEvent) -> void:
+	var handle_input := true
 
+	if event.is_action_pressed(&"click"):
+		is_valid_click = true
+		drag_start = get_global_mouse_position() - offset_transform_position
+	elif event.is_action_released(&"click"):
+		var current_slot: DisplaySlot = null
+		var current_dist: float = INF
+		for inventory_display_slot: DisplaySlot in get_tree().get_nodes_in_group(&"slots"):
+			var pos: Vector2 = global_position
+			var dist: float = pos.distance_squared_to(inventory_display_slot.global_position)
+			if dist <= DROP_RADIUS and dist < current_dist:
+				current_slot = inventory_display_slot
+				current_dist = dist
 
-func _on_button_up() -> void:
-	var current_slot: DisplaySlot = null
-	var current_dist: float = INF
-	for inventory_display_slot: DisplaySlot in get_tree().get_nodes_in_group(&"slots"):
-		var pos: Vector2 = global_position
-		var dist: float = pos.distance_squared_to(inventory_display_slot.global_position)
-		if dist <= DROP_RADIUS and dist < current_dist:
-			current_slot = inventory_display_slot
-			current_dist = dist
+		# Assumes the parent is always the slot this display item is in.
+		var from_slot: DisplaySlot = get_parent()
+		if current_slot != null:
+			#assert(current_slot != from_slot)
+			current_slot.inventory.move_item(from_slot.inventory, from_slot.index, current_slot.index)
+			reparent(current_slot, false)
+			if current_slot == from_slot and is_valid_click:
+				handle_input = false
+				clicked.emit()
+		else:
+			from_slot.inventory.drop_item(from_slot.index, item.count,
+					get_tree().current_scene, global_position)
 
-	# Assumes the parent is always the slot this display item is in.
-	var from_slot: DisplaySlot = get_parent()
-	if current_slot != null:
-		#assert(current_slot != from_slot)
-		current_slot.inventory.move_item(from_slot.inventory, from_slot.index, current_slot.index)
-		reparent(current_slot, false)
-		if current_slot == from_slot and is_valid_click:
-			clicked.emit()
-	else:
-		from_slot.inventory.drop_item(from_slot.index, item.count,
-				get_tree().current_scene, global_position)
+		offset_transform_position = Vector2.ZERO
+		drag_start = Vector2.INF
 
-	offset_transform_position = Vector2.ZERO
-	drag_start = Vector2.INF
+	if handle_input:
+		get_viewport().set_input_as_handled()

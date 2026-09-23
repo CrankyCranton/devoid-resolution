@@ -20,5 +20,8 @@ metadata/_snap_enabled = true
 custom_minimum_size = Vector2(24, 24)
 offset_right = 24.0
 offset_bottom = 24.0
+mouse_filter = 0
 texture = SubResource("GradientTexture2D_wllmm")
 script = ExtResource("1_8ql6l")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

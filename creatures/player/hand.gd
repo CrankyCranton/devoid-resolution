@@ -28,11 +28,8 @@ func unwield() -> void:
 
 
 func wield(item: AbstractItem) -> void:
-	if item == null:
-		unwield()
-	else:
-		# Since items aren't immediatly freed, this could cause problems.
-		assert(not has_item, "Cannot wield two items in one hand!")
+	unwield()
+	if item != null:
 		var wieldable: Wieldable = item.SCENE.instantiate()
 		add_child(wieldable)
 		wieldable.owner = self.owner

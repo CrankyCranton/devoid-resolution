@@ -29,6 +29,7 @@ var selection: int
 
 func _ready() -> void:
 	slot_arranger.arrange_child.connect(_on_slot_arranger_arrange_child)
+	slot_arranger.slot_selected.connect(_on_slot_arranger_slot_selected)
 	slot_arranger.arrange()
 	select(0)
 
@@ -54,3 +55,7 @@ func select(index: int) -> void:
 func _on_slot_arranger_arrange_child(child: Node, index: int, children: Array[Node]) -> void:
 	var path_length: float = curve.get_baked_length() # WARNING: Could be performance heavy.
 	child.position = curve.sample_baked((float(index) / children.size()) * path_length)
+
+
+func _on_slot_arranger_slot_selected(slot: DisplaySlot) -> void:
+	select(slot.index)

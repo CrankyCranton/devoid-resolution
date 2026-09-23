@@ -1,6 +1,8 @@
 class_name DisplaySlot extends TextureRect
 
 
+signal selected(slot: DisplaySlot)
+
 @export var inventory: Inventory = null
 @export var reserve_slot := false
 
@@ -36,6 +38,12 @@ func _on_inventory_item_created(slot: int, item: AbstractItem) -> void:
 func _on_inventory_item_deleted(slot: int) -> void:
 	if slot == index:
 		display_item.queue_free()
+
+
+func _on_gui_input(event: InputEvent) -> void:
+	# Triggers when releasing too, in case it passes through DisplayItem after a failed drag.
+	if event.is_action(&"click"):
+		selected.emit(self)
 
 
 # DEPRECATED. Since AbstractItem is an object, it can update the counter via a signal it emits.

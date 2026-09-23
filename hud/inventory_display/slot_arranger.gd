@@ -7,6 +7,7 @@ class_name SlotArranger extends RefCounted
 # I'm using a signal instead of a method call because it's more convenient to connect
 # a signal than to pass a callable variable IMO.
 signal arrange_child(child: Node, index: int, children: Array[Node])
+signal slot_selected(slot: DisplaySlot)
 
 var owner: Node
 var inventory: Inventory
@@ -43,7 +44,8 @@ func _on_owner_ready() -> void:
 			slot.create_item(inventory.items[i])
 
 
-func _on_owner_child_entered_tree(_node: Node) -> void:
+func _on_owner_child_entered_tree(node: DisplaySlot) -> void:
+	node.selected.connect(slot_selected.emit)
 	arrange()
 
 
