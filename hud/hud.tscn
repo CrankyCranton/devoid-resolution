@@ -12,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="MenuDim" type="ColorRect" parent="ControlRoot" unique_id=482467086]
 unique_name_in_owner = true

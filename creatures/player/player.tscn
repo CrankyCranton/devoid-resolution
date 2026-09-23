@@ -23,7 +23,7 @@ metadata/_snap_enabled = true
 [sub_resource type="CircleShape2D" id="CircleShape2D_wnj1o"]
 radius = 16.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_x5ubq"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ui20s"]
 resource_local_to_scene = true
 radius = 8.0
 
@@ -44,7 +44,7 @@ shape = SubResource("CircleShape2D_wnj1o")
 collision_layer = 256
 
 [node name="CollisionShape2D" parent="Hitbox" index="0" unique_id=1827316461]
-shape = SubResource("CircleShape2D_x5ubq")
+shape = SubResource("CircleShape2D_ui20s")
 
 [node name="Health" parent="." unique_id=1038555171 node_paths=PackedStringArray("hitboxes") instance=ExtResource("6_c6leb")]
 hitboxes = [NodePath("../Hitbox")]
