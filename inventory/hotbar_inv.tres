@@ -9,6 +9,7 @@
 script = ExtResource("1_n0has")
 SCENE = ExtResource("2_7ca22")
 icon = ExtResource("3_2l78a")
+count = 20
 metadata/_custom_type_script = "uid://cgljwurtxiqme"
 
 [resource]

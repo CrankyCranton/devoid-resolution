@@ -54,8 +54,8 @@ func _on_gui_input(event: InputEvent) -> void:
 #func _on_inventory_items_added(slot: int, count: int) -> void:
 	#if slot == index:
 		#get_child(0).count += count
-
-
+#
+#
 #func _on_inventory_items_subtracted(slot: int, count: int) -> void:
 	#if slot == index:
 		#get_child(0).count -= count

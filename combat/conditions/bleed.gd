@@ -13,7 +13,7 @@ var bleeding: int = 10:
 		bleeding = value
 		if bleeding <= 0:
 			queue_free()
-var bleed_rate: float = 1.0
+var bleed_rate: float = 2.0
 
 @warning_ignore("shadowed_variable_base_class")
 func _init(target: Node, instigator: Node, bleeding: int, bleed_rate: float = 1.0) -> void:

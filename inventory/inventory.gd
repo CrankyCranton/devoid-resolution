@@ -15,23 +15,27 @@ signal slots_full
 ## Format: [<slot_idx>: <InventoryItem>]
 @export var items: Dictionary[int, AbstractItem]
 
+var owner: Node
+
 
 # Should there be an option for selecting a slot when adding items?
 # Because the player may not be able to add items, but only move or remove them.
-func add_item(item: AbstractItem, count: int = 1) -> void:
+func add_item(item: AbstractItem) -> Error:
 	var remaining_slots: PackedInt64Array = range(max_slots)
 	for slot: int in items:
 		assert(slot < max_slots)
-		if items[slot].SCENE == item:
-			_add_items(slot, count)
-			return
+		if items[slot].SCENE == item.SCENE:
+			_add_items(slot, item.count)
+			return OK
 		else:
 			remaining_slots.erase(slot)
 
 	if remaining_slots.size() > 0:
 		_create_item(remaining_slots[0], item)
+		return OK
 	else:
 		slots_full.emit()
+		return ERR_CANT_CREATE
 
 
 # WARNING: This function allows for creating multiple stacks of the same item
@@ -68,19 +72,22 @@ func remove_item(slot: int, count: int) -> void:
 	_delete_item(slot) if items[slot].count <= count else _subtract_items(slot, count)
 
 
-func drop_item(slot: int, count: int, caller: Node, location: Vector2) -> void:
+func drop_item(slot: int, count: int) -> void:
 	assert(count <= items[slot].count, "Can't drop more items than exist.")
 	var dist: float = RAND_DROP_OFFSET * sqrt(sqrt(count))
 	for i: int in count:
-		var pickup: Pickup = preload("uid://dx02lx8hb7pll").instantiate()
-		pickup.ITEM = items[slot].SCENE
-		pickup.global_position = location + Utils.rand_vec2_radial(dist)
-		caller.add_sibling(pickup)
+		var pickup: Pickup = preload("uid://cfnmmkeaw3xeo").instantiate()
+		var item: AbstractItem = items[slot].duplicate(true)
+		item.count = 1
+		pickup.item = item
+		pickup.position = owner.position + Utils.rand_vec2_radial(dist)
+		owner.add_sibling(pickup)
 	remove_item(slot, count)
 
 
 func _create_item(slot: int, item: AbstractItem) -> void:
-	items[slot] = item.duplicate(true)
+	item = item.duplicate(true)
+	items[slot] = item
 	item_created.emit(slot, item)
 
 

@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cfnmmkeaw3xeo"]
+
+[ext_resource type="PackedScene" uid="uid://b6uqx4ybutlb1" path="res://interactable/interactable.tscn" id="1_jdpy3"]
+[ext_resource type="Script" uid="uid://cfmlbs2vnu1tp" path="res://interactable/pickup/pickup.gd" id="2_psyp8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_psyp8"]
+resource_local_to_scene = true
+radius = 64.0
+
+[sub_resource type="Gradient" id="Gradient_pcvnc"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1ucx6"]
+gradient = SubResource("Gradient_pcvnc")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[node name="Pickup" unique_id=162460185 instance=ExtResource("1_jdpy3")]
+script = ExtResource("2_psyp8")
+item = null
+simultanious_interact = true
+
+[node name="Instructions" parent="." index="0" unique_id=1867995370]
+text = "Press E to pick up"
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=334175956]
+shape = SubResource("CircleShape2D_psyp8")
+
+[node name="Sprites" type="Node2D" parent="." index="2" unique_id=1380810606]
+
+[node name="Glow" type="PointLight2D" parent="." index="3" unique_id=180123398]
+texture = SubResource("GradientTexture2D_1ucx6")

@@ -57,8 +57,7 @@ func _on_gui_input(event: InputEvent) -> void:
 				handle_input = false
 				clicked.emit()
 		else:
-			from_slot.inventory.drop_item(from_slot.index, item.count,
-					get_tree().current_scene, global_position)
+			from_slot.inventory.drop_item(from_slot.index, item.count)
 
 		offset_transform_position = Vector2.ZERO
 		drag_start = Vector2.INF

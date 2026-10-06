@@ -12,3 +12,10 @@
 
 
 @export var sub_inventory: Inventory
+
+
+func _init() -> void:
+	super()
+	# NOTE: Bags and other items with sub-resources can't be stacked,
+	# else there would need to be a way to split sub_inventory when stacks are split.
+	max_stack_size = 1

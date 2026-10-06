@@ -19,9 +19,12 @@ var corruption: int = 0:
 @onready var hand_l: Hand = $HandL
 @onready var hand_r: Hand = $HandR # Probs not needed.
 @onready var player_hud: PlayerHUD = $PlayerHUD
+@onready var hotbar: Hotbar = player_hud.get_node(^"ControlRoot/Hotbar")
+@onready var inventory: Inventory = hotbar.inventory
 
 
 func _ready() -> void:
+	inventory.owner = self
 	var adrenaline_ticker := Ticker.new(func() -> float: return 0.5, _on_adrenaline_ticker_ticked)
 	add_child(adrenaline_ticker)
 	player_hud.set_max_health(health.max_health)
