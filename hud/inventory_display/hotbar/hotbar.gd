@@ -30,6 +30,7 @@ var selection: int
 func _ready() -> void:
 	slot_arranger.arrange_child.connect(_on_slot_arranger_arrange_child)
 	slot_arranger.slot_selected.connect(_on_slot_arranger_slot_selected)
+	slot_arranger.slot_item_changed.connect(_on_slot_arranger_slot_item_changed)
 	slot_arranger.arrange()
 	select(0)
 
@@ -59,3 +60,9 @@ func _on_slot_arranger_arrange_child(child: Node, index: int, children: Array[No
 
 func _on_slot_arranger_slot_selected(slot: DisplaySlot) -> void:
 	select(slot.index)
+
+
+
+func _on_slot_arranger_slot_item_changed(item: AbstractItem, slot: DisplaySlot) -> void:
+	if slot.index == selection:
+		item_selected.emit(item)

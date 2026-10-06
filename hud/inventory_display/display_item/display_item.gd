@@ -50,7 +50,9 @@ func _on_gui_input(event: InputEvent) -> void:
 		if current_slot != null:
 			#assert(current_slot != from_slot)
 			current_slot.inventory.move_item(from_slot.inventory, from_slot.index, current_slot.index)
-			reparent(current_slot, false)
+			# This isn't neccessary, because it'll be deleted after callbacks
+			# from inventory.gd anyways.
+			#reparent(current_slot, false)
 			if current_slot == from_slot and is_valid_click:
 				handle_input = false
 				clicked.emit()

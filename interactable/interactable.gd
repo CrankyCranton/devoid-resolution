@@ -11,7 +11,7 @@ var within_range := false
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"interact") and within_range and current_interactable == null:
 		current_interactable = self
-		# await start_dialogue()
+		#await start_dialogue()
 		current_interactable = null
 
 

@@ -8,6 +8,7 @@ class_name SlotArranger extends RefCounted
 # a signal than to pass a callable variable IMO.
 signal arrange_child(child: Node, index: int, children: Array[Node])
 signal slot_selected(slot: DisplaySlot)
+signal slot_item_changed(item: AbstractItem, slot: DisplaySlot)
 
 var owner: Node
 var inventory: Inventory
@@ -46,6 +47,7 @@ func _on_owner_ready() -> void:
 
 func _on_owner_child_entered_tree(node: DisplaySlot) -> void:
 	node.selected.connect(slot_selected.emit)
+	node.item_changed.connect(slot_item_changed.emit.bind(node))
 	arrange()
 
 

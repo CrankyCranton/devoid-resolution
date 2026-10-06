@@ -2,6 +2,7 @@ class_name DisplaySlot extends TextureRect
 
 
 signal selected(slot: DisplaySlot)
+signal item_changed(item: AbstractItem)
 
 @export var inventory: Inventory = null
 @export var reserve_slot := false
@@ -33,11 +34,13 @@ func create_item(item: AbstractItem) -> void:
 func _on_inventory_item_created(slot: int, item: AbstractItem) -> void:
 	if slot == index:
 		create_item(item)
+		item_changed.emit(item)
 
 
 func _on_inventory_item_deleted(slot: int) -> void:
 	if slot == index:
 		display_item.queue_free()
+		item_changed.emit(null)
 
 
 func _on_gui_input(event: InputEvent) -> void:
