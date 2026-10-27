@@ -1,54 +1,63 @@
-class_name Gun extends Wieldable
+class_name Gun extends Bag
 
 
 signal hurt(hitbox: Hitbox)
 
 @export var BULLET: PackedScene # Q: Should the bullet scene be synced with Magazine.AmmoType?
-@export var magazine: Magazine
+#@export var magazine: Magazine
+# Change to float so that only automatic guns inheritly have a cooldown?
 @export var automatic := false
-@export var auto_reload := true
+#@export var auto_reload := true
 
 var holding_trigger := false
 var cooling := false
-var reloading := false
-var reload_mag: Magazine:
-	get:
-		return reload_mag if reload_mag != null else Magazine.new(magazine.type, 0)
+#var reloading := false
+#var reload_mag: Magazine:
+	#get:
+		#return reload_mag if reload_mag != null else Magazine.new(magazine.type, 0)
 
 @onready var barrel: Marker2D = $Barrel
 @onready var cooldown: Timer = $Cooldown
-@onready var reload_timer: Timer = $ReloadTimer
+#@onready var reload_timer: Timer = $ReloadTimer
 
 
-func start() -> void:
-	holding_trigger = true
-	if not (reloading or cooling):
-		_shoot()
+func _ready() -> void:
+	assert(item is Inventory)
 
 
-func stop() -> void:
-	holding_trigger = false
+func start(primary := true) -> void:
+	super(primary)
+	if primary != open_on_primary:
+		holding_trigger = true
+		if not cooling:
+			_shoot()
 
 
-func reload() -> void:
-	if reloading:
-		return
-	if magazine.ammo <= -1:
-		return # Guns with infinite ammo can't reload.
-	if not reload_mag.has_ammo():
-		# Play click sound.
-		return
+func stop(primary := true) -> void:
+	if primary != open_on_primary:
+		holding_trigger = false
 
-	reloading = true
-	cooldown.stop()
-	reload_timer.start()
+
+#func reload() -> void:
+	#if reloading:
+		#return
+	#if magazine.ammo <= -1:
+		#return # Guns with infinite ammo can't reload.
+	#if not reload_mag.has_ammo():
+		## Play click sound.
+		#return
+#
+	#reloading = true
+	#cooldown.stop()
+	#reload_timer.start()
 
 
 func _shoot() -> void:
-	if magazine.has_ammo():
-		magazine.ammo -= 1
+	if item.items.size() > 0:
+		#magazine.ammo -= 1
 		cooling = true
-		var bullet: Node2D = BULLET.instantiate()
+		var slot: int = item.items.keys()[0]
+		var bullet: Node2D = item.items[slot].SCENE.instantiate()
 		if bullet.has_signal(&"hurt"):
 			bullet.hurt.connect(hurt.emit)
 		# WARNING: Might be hard to debug, but should work at least.
@@ -56,8 +65,9 @@ func _shoot() -> void:
 		bullet.global_transform = barrel.global_transform
 		get_tree().current_scene.add_child(bullet)
 		cooldown.start()
-	elif auto_reload:
-		reload()
+		(item as Inventory).remove_item(slot, -1)
+	#elif auto_reload:
+		#reload()
 	else:
 		pass # Play click sound.
 
@@ -68,8 +78,8 @@ func _on_cooldown_timeout() -> void:
 		_shoot()
 
 
-func _on_reload_timer_timeout() -> void:
+#func _on_reload_timer_timeout() -> void:
 	# Since it's delayed, it's possible that reload_mag is empty by the time it tries to reload.
 	# Shouldn't be a problem, though.
-	magazine.reload(reload_mag)
-	reloading = false
+	#magazine.reload(reload_mag)
+	#reloading = false

@@ -14,7 +14,9 @@ var item: AbstractItem:
 	set(value):
 		item = value
 		texture = item.icon
-		if item.max_stack_size != 1:
+		# TODO: Make an overidable function on AbstractItem that returns the number it wishes
+		# to display. For inventories, that might be the weight or ##/## items full.
+		if item.stackable:
 			count = item.count
 			item.count_changed.connect(func(count: int) -> void: self.count = count)
 var is_valid_click := true

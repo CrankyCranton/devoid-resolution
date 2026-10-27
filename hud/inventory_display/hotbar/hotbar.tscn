@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d1n0a6to48d4x"]
 
 [ext_resource type="Script" uid="uid://md5285367bjq" path="res://hud/inventory_display/hotbar/hotbar.gd" id="1_w8wls"]
-[ext_resource type="Resource" uid="uid://gvype5k4y7rt" path="res://inventory/hotbar_inv.tres" id="2_wllmm"]
+[ext_resource type="Resource" uid="uid://gvype5k4y7rt" path="res://inventory/items/abstract_item/hotbar_inv.tres" id="2_wllmm"]
 
 [sub_resource type="Curve2D" id="Curve2D_bnswj"]
 _data = {

@@ -1,5 +1,4 @@
-@tool
-class_name Magazine extends Resource
+@tool class_name Magazine extends Resource
 
 
 enum AmmoType {

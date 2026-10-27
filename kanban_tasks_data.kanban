@@ -1,0 +1,59 @@
+{
+	"categories": [
+		{
+			"uuid": "9f292bd9-3abb-40a6-a5ac-2ca15a8f9e36",
+			"title": "Task",
+			"color": "569eff"
+		}
+	],
+	"stages": [
+		{
+			"uuid": "3429f630-e156-4c91-a6dc-52320f5b24aa",
+			"title": "Todo",
+			"tasks": [
+				"fcdfa24a-0e21-48c1-bebd-ea5a313f9080"
+			]
+		},
+		{
+			"uuid": "b78a2c03-4b9c-458e-a29f-0c157e8e5cc3",
+			"title": "Doing",
+			"tasks": [
+				"c6e2e06a-85b2-4d73-9f22-a880f0655c76"
+			]
+		},
+		{
+			"uuid": "abeb2677-b48b-499f-9536-4d2d24695d8c",
+			"title": "Done",
+			"tasks": []
+		}
+	],
+	"tasks": [
+		{
+			"uuid": "c6e2e06a-85b2-4d73-9f22-a880f0655c76",
+			"title": "Make player dive action",
+			"description": "for more interesting movement",
+			"category": "9f292bd9-3abb-40a6-a5ac-2ca15a8f9e36",
+			"steps": []
+		},
+		{
+			"uuid": "fcdfa24a-0e21-48c1-bebd-ea5a313f9080",
+			"title": "Also make vehicles for fast travel.",
+			"description": "Different game mode.",
+			"category": "9f292bd9-3abb-40a6-a5ac-2ca15a8f9e36",
+			"steps": []
+		}
+	],
+	"layout": {
+		"columns": [
+			[
+				"3429f630-e156-4c91-a6dc-52320f5b24aa"
+			],
+			[
+				"b78a2c03-4b9c-458e-a29f-0c157e8e5cc3"
+			],
+			[
+				"abeb2677-b48b-499f-9536-4d2d24695d8c"
+			]
+		]
+	}
+}

@@ -6,16 +6,16 @@ var has_item: bool:
 		return get_child_count() > 0
 
 
-func start() -> void:
+func start(primary := true) -> void:
 	if has_item:
-		get_child(0).start()
+		get_child(0).start(primary)
 	else:
 		pass # Punch
 
 
-func stop() -> void:
+func stop(primary := true) -> void:
 	if has_item:
-		get_child(0).stop()
+		get_child(0).stop(primary)
 
 
 # Making this a seperate function assumes the rest of the inventory system will
@@ -31,5 +31,6 @@ func wield(item: AbstractItem) -> void:
 	unwield()
 	if item != null:
 		var wieldable: Wieldable = item.SCENE.instantiate()
+		wieldable.item = item
 		add_child(wieldable)
 		wieldable.owner = self.owner

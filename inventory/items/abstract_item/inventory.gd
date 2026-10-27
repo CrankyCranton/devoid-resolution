@@ -1,4 +1,4 @@
-class_name Inventory extends Resource
+@tool class_name Inventory extends AbstractItem
 # TODO: Think about if there will be any items like weapons that can't be stacked. If so, handle it.
 
 
@@ -9,13 +9,22 @@ signal item_created(slot: int, item: AbstractItem)
 signal item_deleted(slot: int)
 signal items_added(slot: int, count: int)
 signal items_subtracted(slot: int, count: int)
-signal slots_full
+signal full
 
 @export var max_slots: int = 16 # Add support for changing max_slots dynamically in-game?
+## In lb.
+@export var max_weight: float = 100.0 # Should this be an int?
 ## Format: [<slot_idx>: <InventoryItem>]
 @export var items: Dictionary[int, AbstractItem]
 
 var owner: Node
+
+
+func _init() -> void:
+	super()
+	# NOTE: Bags and other items with sub-resources can't be stacked,
+	# else there would need to be a way to split sub_inventory when stacks are split.
+	stackable = false
 
 
 # Should there be an option for selecting a slot when adding items?
@@ -34,7 +43,7 @@ func add_item(item: AbstractItem) -> Error:
 		_create_item(remaining_slots[0], item)
 		return OK
 	else:
-		slots_full.emit()
+		full.emit()
 		return ERR_CANT_CREATE
 
 
@@ -66,12 +75,14 @@ func move_item(from_inv: Inventory, from_slot: int, to_slot: int) -> void:
 		_create_item(to_slot, moving_item)
 
 
+@warning_ignore("shadowed_variable_base_class")
 func remove_item(slot: int, count: int) -> void:
 	assert(slot < max_slots)
 	@warning_ignore("standalone_ternary")
-	_delete_item(slot) if items[slot].count <= count else _subtract_items(slot, count)
+	_delete_item(slot) if items[slot].count <= count or count == -1 else _subtract_items(slot, count)
 
 
+@warning_ignore("shadowed_variable_base_class")
 func drop_item(slot: int, count: int) -> void:
 	assert(count <= items[slot].count, "Can't drop more items than exist.")
 	var dist: float = RAND_DROP_OFFSET * sqrt(sqrt(count))
@@ -96,11 +107,13 @@ func _delete_item(slot: int) -> void:
 	item_deleted.emit(slot)
 
 
+@warning_ignore("shadowed_variable_base_class")
 func _add_items(slot: int, count: int) -> void:
 	items[slot].count += count
 	items_added.emit(slot, count)
 
 
+@warning_ignore("shadowed_variable_base_class")
 func _subtract_items(slot: int, count: int) -> void:
 	items[slot].count -= count
 	items_subtracted.emit(slot, count)

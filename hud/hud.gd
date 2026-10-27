@@ -4,13 +4,19 @@ extends CanvasLayer
 @onready var menu_dim: ColorRect = %MenuDim
 @onready var menus: HFlowContainer = %Menus
 
+var open_inventories: Array[Inventory]
+
 
 #func _ready() -> void:
 	#open_inventory(preload("uid://c4kc4u6tb3acj"), "Blah")
 
 
 func open_inventory(inventory: Inventory, title := "Items") -> void:
+	if open_inventories.has(inventory):
+		return
+
 	menu_dim.show()
+	open_inventories.append(inventory)
 	var inventory_display: InventoryDisplay = preload("uid://hf8uovgvp6bv").instantiate()
 	inventory_display.inventory = inventory
 	menus.add_child(inventory_display)
@@ -18,7 +24,10 @@ func open_inventory(inventory: Inventory, title := "Items") -> void:
 	inventory_display.title.text = title
 
 
-func _on_menus_child_exiting_tree(_node: Node) -> void:
+func _on_menus_child_exiting_tree(node: Node) -> void:
+	if node is InventoryDisplay:
+		open_inventories.erase(node.inventory)
+
 	# Excluding the node exiting. Could break if multiple nodes are deleted in 1 frame.
 	if menus.get_child_count() <= 1:
 		menu_dim.hide()

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://xhml0aj0hl8l"]
+
+[ext_resource type="Script" uid="uid://jkvcb7vqiie1" path="res://inventory/items/wieldable/bag.gd" id="1_yhicb"]
+
+[node name="Bag" type="Node2D" unique_id=1775966852]
+script = ExtResource("1_yhicb")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1587827609]

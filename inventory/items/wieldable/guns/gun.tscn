@@ -1,23 +1,18 @@
 [gd_scene format=3 uid="uid://durfwpyqokqek"]
 
 [ext_resource type="Script" uid="uid://j7clfqx1kep2" path="res://inventory/items/wieldable/guns/gun.gd" id="1_2ffob"]
-[ext_resource type="Script" uid="uid://vresenge4ppd" path="res://inventory/items/wieldable/guns/magazine.gd" id="2_fc5n0"]
+[ext_resource type="PackedScene" uid="uid://xhml0aj0hl8l" path="res://inventory/items/wieldable/bag.tscn" id="1_qc27k"]
 
-[sub_resource type="Resource" id="Resource_0qvfs"]
-resource_local_to_scene = true
-script = ExtResource("2_fc5n0")
-
-[node name="Gun" type="Node2D" unique_id=1367513799]
+[node name="Gun" unique_id=1775966852 instance=ExtResource("1_qc27k")]
 script = ExtResource("1_2ffob")
-magazine = SubResource("Resource_0qvfs")
+BULLET = null
+automatic = false
+open_on_primary = false
 
-[node name="Barrel" type="Marker2D" parent="." unique_id=1400257630]
+[node name="Barrel" type="Marker2D" parent="." index="1" unique_id=501340435]
 
-[node name="Cooldown" type="Timer" parent="." unique_id=178919166]
-one_shot = true
-
-[node name="ReloadTimer" type="Timer" parent="." unique_id=1633124756]
+[node name="Cooldown" type="Timer" parent="." index="2" unique_id=71306119]
+wait_time = 0.001
 one_shot = true
 
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
-[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

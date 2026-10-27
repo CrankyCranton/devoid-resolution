@@ -14,6 +14,9 @@ var corruption: int = 0:
 	set(value):
 		corruption = value
 		player_hud.set_corruption(corruption)
+# FIXME. This will need to be moved to a condition once the player is converted
+# to a state machine/behavior tree.
+var prone := false
 
 @onready var health: Health = $Health
 @onready var hand_l: Hand = $HandL
@@ -32,10 +35,11 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	rotation = lerp_angle(rotation, global_position.angle_to_point(get_global_mouse_position()),
-			TURN_SPEED * delta)
-	var input: Vector2 = Input.get_vector(&"left", &"right", &"backward", &"forward")
-	velocity = input * SPEED
+	if not prone:
+		rotation = lerp_angle(rotation, global_position.angle_to_point(get_global_mouse_position()),
+				TURN_SPEED * delta)
+		var input: Vector2 = Input.get_vector(&"left", &"right", &"backward", &"forward")
+		velocity = input * SPEED
 	move_and_slide()
 
 
@@ -44,6 +48,18 @@ func _unhandled_input(event: InputEvent) -> void:
 		hand_l.start()
 	if event.is_action_released(&"primary"):
 		hand_l.stop()
+	if event.is_action_pressed(&"secondary"):
+		hand_l.start(false)
+	if event.is_action_released(&"secondary"):
+		hand_l.stop(false)
+	if event.is_action_pressed(&"dive"):
+		const DIVE_SPEED: float = 512.0
+		velocity = transform.x * DIVE_SPEED
+		prone = true
+		await get_tree().create_timer(0.15, false).timeout
+		velocity = Vector2.ZERO
+		await get_tree().create_timer(0.4, false).timeout
+		prone = false
 
 
 func add_adrenaline() -> void:

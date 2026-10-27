@@ -10,15 +10,18 @@ static var scene_to_item_lookup: Dictionary[PackedScene, AbstractItem]
 
 @export var SCENE: PackedScene
 @export var icon: Texture2D
-@export var max_stack_size: int = -1
-@export var count: int = 1: # WARNING: Be sure to copy deep before modifying, or move count to inventory.gd.
+@export var stackable := true
+@export var weight: float = 1.0:
+	get:
+		return weight * count
+# WARNING: Be sure to deep copy before modifying, or move count to inventory.gd.
+@export var count: int = 1:
 	set(value):
-		if max_stack_size >= 0 and value > max_stack_size:
-			push_error("Exeeds max stack size. Clamping.")
-			count = max_stack_size
-		else:
+		if stackable:
 			count = value
-		count_changed.emit(count)
+			count_changed.emit(count)
+		else:
+			count = 1
 
 
 func _init() -> void:

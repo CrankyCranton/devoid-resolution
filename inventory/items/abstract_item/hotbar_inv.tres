@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Inventory" format=3 uid="uid://gvype5k4y7rt"]
+
+[ext_resource type="Script" uid="uid://cgljwurtxiqme" path="res://inventory/items/abstract_item/abstract_item.gd" id="1_6rbb1"]
+[ext_resource type="Resource" uid="uid://dkeed2plwnucr" path="res://inventory/items/abstract_item/item_presets/test_gun.tres" id="2_73ttg"]
+[ext_resource type="Script" uid="uid://t64picqgbn4k" path="res://inventory/items/abstract_item/inventory.gd" id="2_r1xcg"]
+
+[resource]
+script = ExtResource("2_r1xcg")
+max_slots = 10
+max_weight = null
+items = Dictionary[int, ExtResource("1_6rbb1")]({
+0: ExtResource("2_73ttg")
+})
+stackable = null
+metadata/_custom_type_script = "uid://t64picqgbn4k"
